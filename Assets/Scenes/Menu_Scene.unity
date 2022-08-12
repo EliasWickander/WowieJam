@@ -422,8 +422,9 @@ GameObject:
   - component: {fileID: 841986260}
   - component: {fileID: 841986259}
   - component: {fileID: 841986258}
+  - component: {fileID: 841986261}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: InternationalButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -532,6 +533,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 841986256}
   m_CullTransparentMesh: 1
+--- !u!114 &841986261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841986256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ee7394fca39204f9b3a702d13b71cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modename: International
+  modedescription: Thing get serious,the city Layout is different each day and the
+    bots are faster and more prone to error!
 --- !u!1 &1065708470
 GameObject:
   m_ObjectHideFlags: 0
@@ -783,8 +799,9 @@ GameObject:
   - component: {fileID: 1156345437}
   - component: {fileID: 1156345436}
   - component: {fileID: 1156345435}
+  - component: {fileID: 1156345438}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: OptionButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -893,6 +910,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1156345433}
   m_CullTransparentMesh: 1
+--- !u!114 &1156345438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156345433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ee7394fca39204f9b3a702d13b71cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modename: Options
+  modedescription: Modify your preference here
 --- !u!1 &1227997323
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,8 +936,9 @@ GameObject:
   - component: {fileID: 1227997327}
   - component: {fileID: 1227997326}
   - component: {fileID: 1227997325}
+  - component: {fileID: 1227997328}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ScenarioButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1015,6 +1047,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227997323}
   m_CullTransparentMesh: 1
+--- !u!114 &1227997328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227997323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ee7394fca39204f9b3a702d13b71cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modename: Scenario
+  modedescription: Learn and play a workweek of 5 days,From 6 am to 1 pm check ot
+    the deliveries of different bots in the city
 --- !u!1 &1347341671
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,7 +1074,7 @@ GameObject:
   - component: {fileID: 1347341674}
   - component: {fileID: 1347341673}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Descriptiontext
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6322,7 +6369,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -6357,8 +6404,9 @@ GameObject:
   - component: {fileID: 1727684719}
   - component: {fileID: 1727684721}
   - component: {fileID: 1727684720}
+  - component: {fileID: 1727684722}
   m_Layer: 5
-  m_Name: Button Tittle
+  m_Name: BTitle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6481,6 +6529,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1727684718}
   m_CullTransparentMesh: 1
+--- !u!114 &1727684722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727684718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ee7394fca39204f9b3a702d13b71cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modename: 
+  modedescription: 
 --- !u!1 &1846076853
 GameObject:
   m_ObjectHideFlags: 0
@@ -6803,8 +6865,9 @@ GameObject:
   - component: {fileID: 2081943146}
   - component: {fileID: 2081943145}
   - component: {fileID: 2081943144}
+  - component: {fileID: 2081943147}
   m_Layer: 5
-  m_Name: Button (3)
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6913,3 +6976,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2081943142}
   m_CullTransparentMesh: 1
+--- !u!114 &2081943147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081943142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ee7394fca39204f9b3a702d13b71cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modename: Exit
+  modedescription: Quit the game like a furious Vyttoryo Sgarby
