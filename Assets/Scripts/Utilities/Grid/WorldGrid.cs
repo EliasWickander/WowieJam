@@ -8,14 +8,14 @@ using UnityEngine;
 public abstract class WorldGrid<TNode> : MonoBehaviour where TNode : GridNode, new()
 {
     [SerializeField] 
-    private bool m_debug = true;
+    protected bool m_debug = true;
 
     [SerializeField] 
-    private bool m_is3D = true;
+    protected bool m_is3D = true;
     
     [SerializeField] 
     private Vector2 m_worldSize = new Vector2(10, 10);
-    
+
     [SerializeField] 
     private float m_nodeRadius = 0.2f;
 
@@ -31,9 +31,9 @@ public abstract class WorldGrid<TNode> : MonoBehaviour where TNode : GridNode, n
         
     }
 
-    private void CreateGrid()
+    protected void CreateGrid()
     {
-        m_grid = new Grid<TNode>(transform.position, m_worldSize, m_nodeRadius, m_is3D);
+        m_grid = new Grid<TNode>(transform.position, m_worldSize, m_nodeRadius, m_is3D, false);
     }
     
     protected virtual void OnDrawGizmos()

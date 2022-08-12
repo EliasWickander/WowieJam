@@ -13,10 +13,10 @@ namespace CustomUtils
 	{
 		public delegate void OnNodeCreatedDelegate(GridNode node);
 
-		private OnNodeCreatedDelegate OnNodeCreated;
+		public OnNodeCreatedDelegate OnNodeCreated;
 
-		public Vector2 GridWorldSize => m_gridWorldSize;
-		private Vector2 m_gridWorldSize = new Vector2(10, 10);
+		public Vector2 WorldSize => m_worldSize;
+		private Vector2 m_worldSize = new Vector2(10, 10);
 
 		public float NodeRadius => m_nodeRadius;
 		private float m_nodeRadius = 0.2f;
@@ -47,13 +47,13 @@ namespace CustomUtils
 		public Grid(Vector3 originPoint, Vector2 worldSize, float nodeRadius, bool is3D, bool createOnConstruct = true, OnNodeCreatedDelegate onNodeCreated = null)
 		{
 			m_originPoint = originPoint;
-			m_gridWorldSize = worldSize;
+			m_worldSize = worldSize;
 			m_nodeRadius = nodeRadius;
 			m_is3D = is3D;
 			
 			m_nodeDiameter = m_nodeRadius * 2;
-			m_gridSize.x = Mathf.RoundToInt(m_gridWorldSize.x/m_nodeDiameter);
-			m_gridSize.y = Mathf.RoundToInt(m_gridWorldSize.y/m_nodeDiameter);
+			m_gridSize.x = Mathf.RoundToInt(m_worldSize.x/m_nodeDiameter);
+			m_gridSize.y = Mathf.RoundToInt(m_worldSize.y/m_nodeDiameter);
 
 			OnNodeCreated = onNodeCreated;
 			
