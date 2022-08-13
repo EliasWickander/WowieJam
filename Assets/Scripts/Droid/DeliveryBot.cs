@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum DroidStates
 {
@@ -17,7 +18,8 @@ public class DeliveryBot : MonoBehaviour
 
     public float MoveSpeed => m_moveSpeed;
     
-    public Transform m_target;
+    private GameObject m_targetBuilding;
+    public GameObject TargetBuilding => m_targetBuilding;
 
     private Pathfinding m_pathfinding;
     public Pathfinding Pathfinding => m_pathfinding;
@@ -26,11 +28,21 @@ public class DeliveryBot : MonoBehaviour
     public Vector3 StartPos => m_startPos;
 
     private StateMachine m_stateMachine;
+
+    private DeliveryTargetGenerator m_deliveryTargetGenerator;
     
     private void Awake()
     {
-        m_startPos = transform.position;
         m_pathfinding = FindObjectOfType<Pathfinding>();
+
+        m_deliveryTargetGenerator = LevelManager.Instance.DeliveryTargetGenerator;
+
+        m_targetBuilding = GetRandomAvailableBuilding();
+    }
+
+    private void OnEnable()
+    {
+        m_startPos = transform.position;
         InitStateMachine();
     }
 
@@ -49,5 +61,14 @@ public class DeliveryBot : MonoBehaviour
         };
         
         m_stateMachine = new StateMachine(states);
+    }
+
+    private GameObject GetRandomAvailableBuilding()
+    {
+        List<GameObject> availableBuildings = m_deliveryTargetGenerator.GeneratedTargets;
+        
+        int rand = Random.Range(0, m_deliveryTargetGenerator.GeneratedTargets.Count);
+
+        return availableBuildings[rand];
     }
 }

@@ -19,7 +19,7 @@ public class State_Deliver : State
     public override event Action<Enum> onStateTransition;
     public override void OnEnter(State prevState, object[] param)
     {
-        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, m_controller.m_target.position);
+        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, m_controller.TargetBuilding.transform.position, false);
         NextNode();
     }
 
@@ -40,6 +40,7 @@ public class State_Deliver : State
         {
             dirToNode.Normalize();
             m_controller.transform.position += dirToNode * m_controller.MoveSpeed * Time.deltaTime;
+            m_controller.transform.rotation = Quaternion.LookRotation(dirToNode);
         }
     }
 
