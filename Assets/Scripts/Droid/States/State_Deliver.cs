@@ -38,6 +38,11 @@ public class State_Deliver : State
         {
             if (!NextNode())
             {
+                if (m_controller.CurrentTarget != m_controller.DesignatedTarget)
+                {
+                    LevelManager.Instance.AddMistake();
+                }
+                
                 onStateTransition?.Invoke(DroidStates.Return);
                 return;
             }
