@@ -40,6 +40,8 @@ public class DeliveryBotSpawner : MonoBehaviour
 
     public event Action<DeliveryBot> OnBotSpawned;
 
+    public event Action<DeliveryBot> OnBotDelivered;
+
     private void Awake()
     {
         foreach (BotSpawnData spawnData in m_botSpawnData)
@@ -53,6 +55,11 @@ public class DeliveryBotSpawner : MonoBehaviour
         m_buildingManager = LevelManager.Instance.BuildingManager;
 
         m_currentSpawnDelay = m_startSpawnDelay;
+    }
+
+    private void OnBotFinishedDelivery(DeliveryBot bot)
+    {
+        OnBotDelivered?.Invoke(bot);
     }
 
     private void Update()
@@ -113,7 +120,8 @@ public class DeliveryBotSpawner : MonoBehaviour
             if(idPair.Value == false)
                 availableIds.Add(idPair.Key);
         }
-        
+
+        spawnedBot.OnFinishedDelivery += OnBotFinishedDelivery;
         spawnedBot.Name = availableIds[Random.Range(0, availableIds.Count)];
         spawnedBot.OnDestroyed += OnBotDestroyed;
         OnBotSpawned?.Invoke(spawnedBot);
@@ -127,6 +135,7 @@ public class DeliveryBotSpawner : MonoBehaviour
     private void OnBotDestroyed(DeliveryBot bot)
     {
         bot.spawnData.m_botsInAction[bot.Name] = false;
+        bot.OnFinishedDelivery -= OnBotFinishedDelivery;
     }
 
     private Building GetRandomAvailableBuilding(Building ignoredBuilding = null)

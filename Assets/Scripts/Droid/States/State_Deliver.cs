@@ -42,6 +42,10 @@ public class State_Deliver : State
                 {
                     LevelManager.Instance.AddMistake();
                 }
+                else
+                {
+                    m_controller.FinishedDeliveryCallback();
+                }
                 
                 onStateTransition?.Invoke(DroidStates.Return);
                 return;

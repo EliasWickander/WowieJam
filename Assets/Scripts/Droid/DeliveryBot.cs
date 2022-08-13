@@ -18,15 +18,14 @@ public enum DroidType
     Green,
     Blue
 }
+
 public class DeliveryBot : MonoBehaviour
 {
     [HideInInspector]
     public BotSpawnData spawnData;
+    
     [SerializeField] 
     private string m_prefix;
-
-    [SerializeField] 
-    private DroidType m_type;
     
     [SerializeField] 
     private float m_moveSpeed = 5;
@@ -37,13 +36,17 @@ public class DeliveryBot : MonoBehaviour
     [SerializeField] 
     private GameObject m_highlightObject;
 
+    [SerializeField] 
+    private DroidType m_type;
+
+    public DroidType DroidType => m_type;
+    
     public float SlapShockTime => m_slapShockTime;
 
     public string Prefix => m_prefix;
     
     public string Name { get; set; }
 
-    public DroidType DroidType => m_type;
     public float MoveSpeed => m_moveSpeed;
     public Building DesignatedTarget { get; set; }
     public Building CurrentTarget { get; set; }
@@ -61,6 +64,8 @@ public class DeliveryBot : MonoBehaviour
 
     public event Action OnSlapped;
 
+    public event Action<DeliveryBot> OnFinishedDelivery;
+    
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
@@ -98,6 +103,11 @@ public class DeliveryBot : MonoBehaviour
     public void SetHighlighted(bool enabled)
     {
         m_highlightObject.SetActive(enabled);
+    }
+
+    public void FinishedDeliveryCallback()
+    {
+        OnFinishedDelivery?.Invoke(this);
     }
     
     public void Destroy()
