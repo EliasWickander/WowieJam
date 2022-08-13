@@ -19,7 +19,9 @@ public class State_Deliver : State
     public override event Action<Enum> onStateTransition;
     public override void OnEnter(State prevState, object[] param)
     {
-        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, m_controller.TargetBuilding.transform.position, false);
+        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.TargetBuilding.transform.position);
+        
+        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
         NextNode();
     }
 

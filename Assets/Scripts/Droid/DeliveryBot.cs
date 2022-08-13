@@ -18,8 +18,8 @@ public class DeliveryBot : MonoBehaviour
 
     public float MoveSpeed => m_moveSpeed;
     
-    private GameObject m_targetBuilding;
-    public GameObject TargetBuilding => m_targetBuilding;
+    private Building m_targetBuilding;
+    public Building TargetBuilding => m_targetBuilding;
 
     private Pathfinding m_pathfinding;
     public Pathfinding Pathfinding => m_pathfinding;
@@ -29,13 +29,13 @@ public class DeliveryBot : MonoBehaviour
 
     private StateMachine m_stateMachine;
 
-    private DeliveryTargetGenerator m_deliveryTargetGenerator;
+    private BuildingManager m_deliveryTargetGenerator;
     
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
 
-        m_deliveryTargetGenerator = LevelManager.Instance.DeliveryTargetGenerator;
+        m_deliveryTargetGenerator = LevelManager.Instance.BuildingManager;
 
         m_targetBuilding = GetRandomAvailableBuilding();
     }
@@ -63,11 +63,11 @@ public class DeliveryBot : MonoBehaviour
         m_stateMachine = new StateMachine(states);
     }
 
-    private GameObject GetRandomAvailableBuilding()
+    private Building GetRandomAvailableBuilding()
     {
-        List<GameObject> availableBuildings = m_deliveryTargetGenerator.GeneratedTargets;
+        List<Building> availableBuildings = m_deliveryTargetGenerator.Buildings;
         
-        int rand = Random.Range(0, m_deliveryTargetGenerator.GeneratedTargets.Count);
+        int rand = Random.Range(0, m_deliveryTargetGenerator.Buildings.Count);
 
         return availableBuildings[rand];
     }

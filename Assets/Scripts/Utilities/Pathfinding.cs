@@ -25,6 +25,8 @@ public class Pathfinding : MonoBehaviour
     
     [SerializeField] 
     private NavGrid m_grid;
+
+    public NavGrid Grid => m_grid;
     
     //Find closest path between two points using A* pathfinding
     public List<PathNode> FindPath(Vector3 startPoint, Vector3 endPoint, bool includeEndNode = true)

@@ -11,7 +11,7 @@ public class NavNode : GridNode
 
 public class NavGrid : WorldGrid<NavNode>
 {
-    public LayerMask m_obstacleMask;
+    public LayerMask m_walkableMask;
     protected override void Awake()
     {
         base.Awake();
@@ -24,9 +24,28 @@ public class NavGrid : WorldGrid<NavNode>
     {
         NavNode navNode = node as NavNode;
 
-        navNode.m_walkable = !Physics.CheckSphere(node.WorldPosition, 1, m_obstacleMask);
+        navNode.m_walkable = Physics.CheckSphere(node.WorldPosition, 0.5f, m_walkableMask);
     }
 
+    public NavNode GetClosestWalkableNode(Vector3 position)
+    {
+        float closestDist = Mathf.Infinity;
+        NavNode closestNode = Grid.GetNode(position);
+
+        foreach (NavNode node in Grid.Nodes)
+        {
+            Vector3 dirToNode = node.WorldPosition - position;
+
+            if (dirToNode.sqrMagnitude < closestDist && node.m_walkable)
+            {
+                closestDist = dirToNode.sqrMagnitude;
+                closestNode = node;
+            }
+        }
+
+        return closestNode;
+    }
+    
     protected override void OnDrawGizmos()
     {
         if(!m_debug)

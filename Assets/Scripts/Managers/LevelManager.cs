@@ -8,9 +8,9 @@ public class LevelManager : MonoBehaviour
     public static LevelManager Instance { get; private set; }
 
     [SerializeField]
-    private DeliveryTargetGenerator m_deliveryTargetGenerator;
+    private BuildingManager m_buildingManager;
 
-    public DeliveryTargetGenerator DeliveryTargetGenerator => m_deliveryTargetGenerator;
+    public BuildingManager BuildingManager => m_buildingManager;
     
     private void Awake()
     {
