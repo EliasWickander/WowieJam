@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class DeliveryInfoBoxUpdater : MonoBehaviour
@@ -15,7 +16,7 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
 
     private Dictionary<DeliveryBot, DeliveryInfoBox> m_infoBoxesDisplayed = new Dictionary<DeliveryBot, DeliveryInfoBox>();
     
-    private Queue<KeyValuePair<DeliveryBot, DeliveryInfoBox>> m_infoBoxesInQueue = new Queue<KeyValuePair<DeliveryBot, DeliveryInfoBox>>();
+    private Dictionary<DeliveryBot, DeliveryInfoBox> m_infoBoxesInQueue = new Dictionary<DeliveryBot, DeliveryInfoBox>();
     private void Awake()
     {
         m_deliveryBotSpawner = FindObjectOfType<DeliveryBotSpawner>();
@@ -38,23 +39,35 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
         else
         {
             newInfoBox.gameObject.SetActive(false);
-            m_infoBoxesInQueue.Enqueue(new KeyValuePair<DeliveryBot, DeliveryInfoBox>(bot, newInfoBox));   
+            m_infoBoxesInQueue.Add(bot, newInfoBox);   
         }
     }
 
     private void OnBotDestroyed(DeliveryBot bot)
     {
-        DeliveryInfoBox infoBox = m_infoBoxesDisplayed[bot];
+        if (m_infoBoxesDisplayed.ContainsKey(bot))
+        {
+            DeliveryInfoBox infoBox = m_infoBoxesDisplayed[bot];
 
-        m_infoBoxesDisplayed.Remove(bot);
+            m_infoBoxesDisplayed.Remove(bot);
         
-        infoBox.Destroy();
+            infoBox.Destroy();   
+        }
+        else
+        {
+            DeliveryInfoBox infoBox = m_infoBoxesInQueue[bot];
+
+            m_infoBoxesInQueue.Remove(bot);
+        
+            infoBox.Destroy();   
+        }
 
         if (m_infoBoxesInQueue.Count > 0)
         {
-            KeyValuePair<DeliveryBot, DeliveryInfoBox> newBoxPair = m_infoBoxesInQueue.Dequeue();
+            KeyValuePair<DeliveryBot, DeliveryInfoBox> newBoxPair = m_infoBoxesInQueue.First();
             newBoxPair.Value.gameObject.SetActive(true);
-            m_infoBoxesDisplayed.Add(newBoxPair.Key, newBoxPair.Value);   
+            m_infoBoxesDisplayed.Add(newBoxPair.Key, newBoxPair.Value);
+            m_infoBoxesInQueue.Remove(newBoxPair.Key);
         }
     }
 }

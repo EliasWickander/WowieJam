@@ -19,8 +19,10 @@ public enum DroidType
 }
 public class DeliveryBot : MonoBehaviour
 {
+    [HideInInspector]
+    public BotSpawnData spawnData;
     [SerializeField] 
-    private string m_name;
+    private string m_prefix;
 
     [SerializeField] 
     private DroidType m_type;
@@ -28,7 +30,9 @@ public class DeliveryBot : MonoBehaviour
     [SerializeField] 
     private float m_moveSpeed = 5;
 
-    public string Name => m_name;
+    public string Prefix => m_prefix;
+    
+    public string Name { get; set; }
 
     public DroidType DroidType => m_type;
     public float MoveSpeed => m_moveSpeed;
