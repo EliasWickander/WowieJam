@@ -10,6 +10,7 @@ public class StateMachine
 
     private State m_currentState = null;
     public State CurrentState => m_currentState;
+    public Enum CurrentStateType { get; private set; }
 
     public StateMachine(Dictionary<Enum, State> states)
     {
@@ -43,6 +44,7 @@ public class StateMachine
         newState.onStateTransition += SetState;
         newState.OnEnter(oldState, param);
         m_currentState = newState;
+        CurrentStateType = state;
     }
 
     public void SetState(Enum state)
