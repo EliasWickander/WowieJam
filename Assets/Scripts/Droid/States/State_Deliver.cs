@@ -23,7 +23,7 @@ public class State_Deliver : State
 
         m_currentNodeIndex = -1;
         
-        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.CurrentTarget.transform.position);
+        NavNode targetNode = m_controller.CurrentTarget.ClosestNavNode;
         
         m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
         NextNode();

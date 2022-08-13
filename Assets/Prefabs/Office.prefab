@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 454148517878964336}
   - {fileID: 8745133230825732790}
+  - {fileID: 6771623120972656391}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -48,6 +49,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_icon: {fileID: 10911, guid: 0000000000000000f000000000000000, type: 0}
   m_highlightObject: {fileID: 8221080302599315468}
+  m_entrancePoint: {fileID: 6771623120972656391}
+--- !u!1 &8555582906856441029
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6771623120972656391}
+  m_Layer: 0
+  m_Name: Entrance
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6771623120972656391
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8555582906856441029}
+  m_LocalRotation: {x: -0, y: 0.010930711, z: -0, w: 0.99994034}
+  m_LocalPosition: {x: 1.68, y: -0.02, z: 3.94}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1761414224593921005}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &128296337217111963
 PrefabInstance:
   m_ObjectHideFlags: 0

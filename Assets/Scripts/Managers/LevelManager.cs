@@ -11,6 +11,10 @@ public class LevelManager : MonoBehaviour
     private BuildingManager m_buildingManager;
 
     public BuildingManager BuildingManager => m_buildingManager;
+    
+    private NavGrid m_navGrid;
+
+    public NavGrid NavGrid => m_navGrid;
 
     private int m_mistakes = 0;
     public int Mistakes => m_mistakes;
@@ -19,6 +23,7 @@ public class LevelManager : MonoBehaviour
     {
         Instance = this;
 
+        m_navGrid = FindObjectOfType<NavGrid>();
         m_mistakes = 0;
     }
 
