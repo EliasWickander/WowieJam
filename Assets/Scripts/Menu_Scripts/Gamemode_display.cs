@@ -9,18 +9,29 @@ public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitH
     //Data
     GameObject InformationPanel,titleholder,Descriptionholder;
     TMP_Text title, description;
+    AudioSource au;
    [SerializeField] string modename, modedescription;
-    // Start is called before the first frame update
-    void Start()
+
+
+    private void Awake()
     {
         //Get Gameobject
         InformationPanel = GameObject.Find("InfoPanel");
-       
+
         titleholder = InformationPanel.transform.GetChild(0).gameObject;
-        Descriptionholder=InformationPanel.transform.GetChild(1).gameObject;
+        Descriptionholder = InformationPanel.transform.GetChild(1).gameObject;
+        au = GetComponent<AudioSource>();
         //Get TMP
-       title = titleholder.GetComponent<TMP_Text>();
-       description = Descriptionholder.GetComponent<TMP_Text>();
+        title = titleholder.GetComponent<TMP_Text>();
+        description = Descriptionholder.GetComponent<TMP_Text>();
+    }
+    // Start is called before the first frame update
+    void Start()
+    {
+       
+
+
+       
 
     }
 
@@ -35,6 +46,8 @@ public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         InformationPanel.SetActive(true);
         title.text = modename;
         description.text = modedescription;
+        au.Play();
+
     }
     private void OnMouseOver()
     {
