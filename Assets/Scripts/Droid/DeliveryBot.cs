@@ -34,6 +34,9 @@ public class DeliveryBot : MonoBehaviour
     [SerializeField] 
     private float m_slapShockTime = 1;
 
+    [SerializeField] 
+    private GameObject m_highlightObject;
+
     public float SlapShockTime => m_slapShockTime;
 
     public string Prefix => m_prefix;
@@ -90,6 +93,11 @@ public class DeliveryBot : MonoBehaviour
     public void Slap()
     {
         OnSlapped?.Invoke();
+    }
+
+    public void SetHighlighted(bool enabled)
+    {
+        m_highlightObject.SetActive(enabled);
     }
     
     public void Destroy()
