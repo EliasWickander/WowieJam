@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 023990617efa0d346939e1a23d9d37d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_name: BlueBot
+  m_prefix: B
   m_type: 2
   m_moveSpeed: 5

@@ -46,6 +46,7 @@ public class DeliverySupervisor : MonoBehaviour
             }
         }
         
+        LevelManager.Instance.AddMistake();
         //No bots to correct
     }
 }
