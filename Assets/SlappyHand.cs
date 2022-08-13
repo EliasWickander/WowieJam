@@ -6,8 +6,6 @@ using UnityEngine.EventSystems;
 
 public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
 {
-    public float m_slapRadius = 5;
-    
     private RectTransform m_rectTransform;
     private Vector2 m_startPos;
 
