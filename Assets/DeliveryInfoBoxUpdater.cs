@@ -39,6 +39,7 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
         DeliveryInfoBox newInfoBox = Instantiate(m_infoBoxPrefab, transform);
         newInfoBox.m_botNameAsset.text = bot.Name;
         newInfoBox.m_botImageAsset.sprite = bot.DesignatedTarget.m_icon;
+        newInfoBox.m_houseNumberAsset.text = bot.DesignatedTarget.m_houseNumber;
 
         if (m_infoBoxesDisplayed.Count < m_maxBoxesAtOnce)
         {

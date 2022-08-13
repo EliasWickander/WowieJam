@@ -49,6 +49,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_icon: {fileID: 21300000, guid: b1ff4ab88abc35643b0b6d7dd300751b, type: 3}
+  m_houseNumber: 01
+  m_houseNumberBG: {r: 1, g: 1, b: 0, a: 1}
+  m_houseNumberTextMesh: {fileID: 3947302436991571214}
+  m_houseNumberBgImage: {fileID: 6303646574722655545}
   m_highlightObject: {fileID: 2665672678644786524}
   m_entrancePoint: {fileID: 8669142624924228929}
 --- !u!1 &8864355581297156885
@@ -263,6 +267,28 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 5416071108971335110, guid: 89eba45fbbcc2954fb62ee72aab2ff5f, type: 3}
   m_PrefabInstance: {fileID: 4950021406115537007}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3947302436991571214 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8247674871856903521, guid: 89eba45fbbcc2954fb62ee72aab2ff5f, type: 3}
+  m_PrefabInstance: {fileID: 4950021406115537007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6303646574722655545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1425687349805385046, guid: 89eba45fbbcc2954fb62ee72aab2ff5f, type: 3}
+  m_PrefabInstance: {fileID: 4950021406115537007}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6866296503435123372
 PrefabInstance:
   m_ObjectHideFlags: 0

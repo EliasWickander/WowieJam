@@ -3528,6 +3528,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8375102337808566712, guid: 958777fb54fed2a42b9366069079106e, type: 3}
+      propertyPath: m_houseNumber
+      value: 03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 958777fb54fed2a42b9366069079106e, type: 3}
 --- !u!4 &911716099 stripped
@@ -4626,6 +4630,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeBlue (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5810584030555031214, guid: c5e30cdebb46c9849b4865a9aac2af6e, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     - target: {fileID: 8890363328426981289, guid: c5e30cdebb46c9849b4865a9aac2af6e, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -5596,6 +5604,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House_Red (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 8308122915336028380, guid: fc54e1f0abf427544a09589668acf361, type: 3}
+      propertyPath: m_houseNumber
+      value: 03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc54e1f0abf427544a09589668acf361, type: 3}
 --- !u!4 &1406705880 stripped
@@ -5785,6 +5797,10 @@ PrefabInstance:
     - target: {fileID: 5116085307115257562, guid: 65cb7d5e3b0ff854db151c02b32f981a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7871237995342712797, guid: 65cb7d5e3b0ff854db151c02b32f981a, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
       objectReference: {fileID: 0}
     - target: {fileID: 8669142624924228929, guid: 65cb7d5e3b0ff854db151c02b32f981a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -7790,6 +7806,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: OfficeBlue
       objectReference: {fileID: 0}
+    - target: {fileID: 5810584030555031214, guid: c5e30cdebb46c9849b4865a9aac2af6e, type: 3}
+      propertyPath: m_houseNumber
+      value: 03
+      objectReference: {fileID: 0}
     - target: {fileID: 8890363328426981289, guid: c5e30cdebb46c9849b4865a9aac2af6e, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -7848,6 +7868,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259693321}
     m_Modifications:
+    - target: {fileID: 2003932552193159408, guid: 8fa2f49d005f2cd4aad58d801d331d6c, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     - target: {fileID: 3462383222184624631, guid: 8fa2f49d005f2cd4aad58d801d331d6c, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -7960,6 +7984,10 @@ PrefabInstance:
     - target: {fileID: 6915816023947573439, guid: 958777fb54fed2a42b9366069079106e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8375102337808566712, guid: 958777fb54fed2a42b9366069079106e, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 958777fb54fed2a42b9366069079106e, type: 3}
@@ -8108,6 +8136,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: House_Red
       objectReference: {fileID: 0}
+    - target: {fileID: 8308122915336028380, guid: fc54e1f0abf427544a09589668acf361, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fc54e1f0abf427544a09589668acf361, type: 3}
 --- !u!1001 &7152366946050810538
@@ -8117,6 +8149,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259693321}
     m_Modifications:
+    - target: {fileID: 6398660366696769997, guid: 15253e9a59590a342be2375d23fd7942, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     - target: {fileID: 6550717945852734069, guid: 15253e9a59590a342be2375d23fd7942, type: 3}
       propertyPath: m_Name
       value: HouseYellow
@@ -8174,6 +8210,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259693321}
     m_Modifications:
+    - target: {fileID: 1127279790162022757, guid: 25cb26b1a1f350e44bc78f8d6212f653, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     - target: {fileID: 2623166209009606754, guid: 25cb26b1a1f350e44bc78f8d6212f653, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -8241,6 +8281,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1259693321}
     m_Modifications:
+    - target: {fileID: 2297467110081525149, guid: 049b01d43e02cf445b37b7394efc908c, type: 3}
+      propertyPath: m_houseNumber
+      value: 02
+      objectReference: {fileID: 0}
     - target: {fileID: 3756427676568224922, guid: 049b01d43e02cf445b37b7394efc908c, type: 3}
       propertyPath: m_RootOrder
       value: 2
