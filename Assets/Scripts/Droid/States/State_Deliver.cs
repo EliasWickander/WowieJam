@@ -19,10 +19,9 @@ public class State_Deliver : State
     public override event Action<Enum> onStateTransition;
     public override void OnEnter(State prevState, object[] param)
     {
-        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.TargetBuilding.transform.position);
-        
-        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
-        NextNode();
+        m_controller.OnSlapped += OnSlapped;
+
+        ResetPathFinding();
     }
 
     public override void OnTick()
@@ -48,7 +47,21 @@ public class State_Deliver : State
 
     public override void OnExit(State nextState)
     {
+        m_controller.OnSlapped -= OnSlapped;
+    }
 
+    private void ResetPathFinding()
+    {
+        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.CurrentTarget.transform.position);
+        
+        m_currentNodeIndex = -1;
+        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
+        NextNode();
+    }
+    private void OnSlapped()
+    {
+        m_controller.CurrentTarget = m_controller.DesignatedTarget;
+        ResetPathFinding();   
     }
     
     private bool NextNode()

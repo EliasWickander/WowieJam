@@ -11,15 +11,29 @@ public enum DroidStates
     End,
 }
 
+public enum DroidType
+{
+    Red,
+    Green,
+    Blue
+}
 public class DeliveryBot : MonoBehaviour
 {
     [SerializeField] 
+    private string m_name;
+
+    [SerializeField] 
+    private DroidType m_type;
+    
+    [SerializeField] 
     private float m_moveSpeed = 5;
 
+    public string Name => m_name;
+
+    public DroidType DroidType => m_type;
     public float MoveSpeed => m_moveSpeed;
-    
-    private Building m_targetBuilding;
-    public Building TargetBuilding => m_targetBuilding;
+    public Building DesignatedTarget { get; set; }
+    public Building CurrentTarget { get; set; }
 
     private Pathfinding m_pathfinding;
     public Pathfinding Pathfinding => m_pathfinding;
@@ -28,24 +42,23 @@ public class DeliveryBot : MonoBehaviour
     public Vector3 StartPos => m_startPos;
 
     private StateMachine m_stateMachine;
+    public StateMachine StateMachine => m_stateMachine;
 
-    private BuildingManager m_deliveryTargetGenerator;
-    
+    public event Action<DeliveryBot> OnDestroyed;
+
+    public event Action OnSlapped;
+
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
-
-        m_deliveryTargetGenerator = LevelManager.Instance.BuildingManager;
-
-        m_targetBuilding = GetRandomAvailableBuilding();
     }
-
-    private void OnEnable()
+    
+    public void Init()
     {
         m_startPos = transform.position;
         InitStateMachine();
     }
-
+    
     private void Update()
     {
         m_stateMachine.Update();
@@ -63,12 +76,14 @@ public class DeliveryBot : MonoBehaviour
         m_stateMachine = new StateMachine(states);
     }
 
-    private Building GetRandomAvailableBuilding()
+    public void Slap()
     {
-        List<Building> availableBuildings = m_deliveryTargetGenerator.Buildings;
-        
-        int rand = Random.Range(0, m_deliveryTargetGenerator.Buildings.Count);
-
-        return availableBuildings[rand];
+        OnSlapped?.Invoke();
+    }
+    
+    public void Destroy()
+    {
+        OnDestroyed?.Invoke(this);
+        Destroy(gameObject);
     }
 }
