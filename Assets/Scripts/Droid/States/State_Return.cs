@@ -20,7 +20,6 @@ public class State_Return : State
     
     public override void OnEnter(State prevState, object[] param)
     {
-        Debug.Log(m_controller.StartPos);
         m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, m_controller.StartPos);
         NextNode();
     }
@@ -42,6 +41,7 @@ public class State_Return : State
         {
             dirToNode.Normalize();
             m_controller.transform.position += dirToNode * m_controller.MoveSpeed * Time.deltaTime;
+            m_controller.transform.rotation = Quaternion.LookRotation(dirToNode);
         }
     }
 

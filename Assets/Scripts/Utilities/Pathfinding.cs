@@ -27,7 +27,7 @@ public class Pathfinding : MonoBehaviour
     private NavGrid m_grid;
     
     //Find closest path between two points using A* pathfinding
-    public List<PathNode> FindPath(Vector3 startPoint, Vector3 endPoint)
+    public List<PathNode> FindPath(Vector3 startPoint, Vector3 endPoint, bool includeEndNode = true)
     {
         PathNode[,] nodes = new PathNode[m_grid.Grid.GridSize.x, m_grid.Grid.GridSize.y];
 
@@ -68,7 +68,7 @@ public class Pathfinding : MonoBehaviour
             //If at end node, we found a path
             if (currentPfNode == endPfNode)
             {
-                return CalculatePath(endPfNode);
+                return CalculatePath(endPfNode, includeEndNode);
             }
             
             openList.Remove(currentPfNode);
@@ -103,10 +103,13 @@ public class Pathfinding : MonoBehaviour
     }
 
     //Retrace the path from node
-    private List<PathNode> CalculatePath(PathNode endNode)
+    private List<PathNode> CalculatePath(PathNode endNode, bool includeEndNode)
     {
-        List<PathNode> path = new List<PathNode>() {endNode};
+        List<PathNode> path = new List<PathNode>();
 
+        if(includeEndNode)
+            path.Add(endNode);
+        
         PathNode currentNode = endNode;
 
         while (currentNode.PrevNode != null)
