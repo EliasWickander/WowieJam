@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialManager : MonoBehaviour
 {
@@ -33,6 +34,23 @@ public class TutorialManager : MonoBehaviour
             //pause time,display
             PopUpIndex++;
         }
-        
+        if(PopUpIndex==2)//insert condition for hovering
+        {
+            PopUpIndex++;
+        }
+        if (PopUpIndex <= 4 && Input.GetKeyDown(KeyCode.Space))
+        {
+            PopUpIndex++;
+        }
+        if (PopUpIndex == 5)//slap correct Ai
+        {
+            PopUpIndex++;
+        }
+        if (PopUpIndex == 6 && Input.GetKeyDown(KeyCode.Space))
+        {
+            SceneManager.LoadScene(0);
+        }
+
+
     }
 }
