@@ -8,6 +8,7 @@ public enum DroidStates
 {
     Deliver,
     Return,
+    Slapped,
     End,
 }
 
@@ -29,6 +30,11 @@ public class DeliveryBot : MonoBehaviour
     
     [SerializeField] 
     private float m_moveSpeed = 5;
+
+    [SerializeField] 
+    private float m_slapShockTime = 1;
+
+    public float SlapShockTime => m_slapShockTime;
 
     public string Prefix => m_prefix;
     
@@ -75,6 +81,7 @@ public class DeliveryBot : MonoBehaviour
             {DroidStates.Deliver, new State_Deliver(this)},
             {DroidStates.Return, new State_Return(this)},
             {DroidStates.End, new State_End(this)},
+            {DroidStates.Slapped, new State_Slapped(this)}
         };
         
         m_stateMachine = new StateMachine(states);

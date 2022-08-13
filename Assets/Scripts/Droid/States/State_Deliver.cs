@@ -21,7 +21,12 @@ public class State_Deliver : State
     {
         m_controller.OnSlapped += OnSlapped;
 
-        ResetPathFinding();
+        m_currentNodeIndex = -1;
+        
+        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.CurrentTarget.transform.position);
+        
+        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
+        NextNode();
     }
 
     public override void OnTick()
@@ -49,19 +54,10 @@ public class State_Deliver : State
     {
         m_controller.OnSlapped -= OnSlapped;
     }
-
-    private void ResetPathFinding()
-    {
-        NavNode targetNode = m_controller.Pathfinding.Grid.GetClosestWalkableNode(m_controller.CurrentTarget.transform.position);
-        
-        m_currentNodeIndex = -1;
-        m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
-        NextNode();
-    }
+    
     private void OnSlapped()
     {
-        m_controller.CurrentTarget = m_controller.DesignatedTarget;
-        ResetPathFinding();   
+        onStateTransition?.Invoke(DroidStates.Slapped);
     }
     
     private bool NextNode()

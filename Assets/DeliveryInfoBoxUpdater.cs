@@ -20,8 +20,16 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
     private void Awake()
     {
         m_deliveryBotSpawner = FindObjectOfType<DeliveryBotSpawner>();
+    }
 
+    private void OnEnable()
+    {
         m_deliveryBotSpawner.OnBotSpawned += OnBotSpawned;
+    }
+
+    private void OnDisable()
+    {
+        m_deliveryBotSpawner.OnBotSpawned -= OnBotSpawned;
     }
 
     private void OnBotSpawned(DeliveryBot bot)
@@ -45,6 +53,8 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
 
     private void OnBotDestroyed(DeliveryBot bot)
     {
+        bot.OnDestroyed -= OnBotDestroyed;
+        
         if (m_infoBoxesDisplayed.ContainsKey(bot))
         {
             DeliveryInfoBox infoBox = m_infoBoxesDisplayed[bot];
@@ -62,7 +72,7 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
             infoBox.Destroy();   
         }
 
-        if (m_infoBoxesInQueue.Count > 0)
+        if (m_infoBoxesInQueue.Count > 0 && m_infoBoxesDisplayed.Count < m_maxBoxesAtOnce)
         {
             KeyValuePair<DeliveryBot, DeliveryInfoBox> newBoxPair = m_infoBoxesInQueue.First();
             newBoxPair.Value.gameObject.SetActive(true);
