@@ -5700,7 +5700,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 898145196}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2112416112}
+        m_TargetAssemblyTypeName: Pausemanager, Assembly-CSharp
+        m_MethodName: gomenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &898145196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9629,7 +9641,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1481381601}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2112416112}
+        m_TargetAssemblyTypeName: Pausemanager, Assembly-CSharp
+        m_MethodName: Restartgame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1481381601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12885,7 +12909,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2060854148}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2112416112}
+        m_TargetAssemblyTypeName: Pausemanager, Assembly-CSharp
+        m_MethodName: Resumegame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2060854148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13185,6 +13221,7 @@ GameObject:
   - component: {fileID: 2112416109}
   - component: {fileID: 2112416110}
   - component: {fileID: 2112416111}
+  - component: {fileID: 2112416112}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -13425,6 +13462,19 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2112416112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2112416105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fb7ed0ffd257f04dbfb35edfa2ce71d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Pausecanvas: {fileID: 111020367}
 --- !u!1001 &2119681490
 PrefabInstance:
   m_ObjectHideFlags: 0
