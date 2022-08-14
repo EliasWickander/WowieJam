@@ -122,9 +122,12 @@ public class LevelManager : MonoBehaviour
         else
         {
             GameManager.Instance.SetState(GameStateType.GameState_Lost);
-            
-            if(m_gameoverCanvas != null)
-                m_gameoverCanvas.SetActive(true);
+
+            if (m_gameoverCanvas != null)
+            {
+                m_isPaused = true;
+                m_gameoverCanvas.SetActive(true);   
+            }
             //game over 
         }
     }

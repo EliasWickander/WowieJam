@@ -69,4 +69,12 @@ public class GameManager : MonoBehaviour
             SceneManager.LoadScene(m_currentGameState.m_sceneToOpenOnEnter);
         }
     }
+
+    public void RestartState()
+    {
+        if(m_currentGameState.m_soundTrack != null)
+            AudioManager.Instance.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
+        
+        SceneManager.LoadScene(m_currentGameState.m_sceneToOpenOnEnter);
+    }
 }

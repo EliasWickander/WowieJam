@@ -28,4 +28,13 @@ public class Scenemanager : MonoBehaviour
     {
         GameManager.Instance.SetState(GameStateType.GameState_Playing);
     }
+
+    public void RestartScene()
+    {
+        GameManager.Instance.RestartState();
+    }
+    public void BackToMainMenu()
+    {
+        GameManager.Instance.SetState(GameStateType.GameState_Menu);
+    }
 }
