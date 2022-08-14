@@ -84,6 +84,8 @@ public class DeliveryBot : MonoBehaviour
     [HideInInspector]
     public AudioSource m_audioSource;
 
+    public bool m_isHighlighted = false;
+
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
@@ -122,6 +124,7 @@ public class DeliveryBot : MonoBehaviour
 
     public void SetHighlighted(bool enabled)
     {
+        m_isHighlighted = enabled;
         m_highlightObject.SetActive(enabled);
     }
 

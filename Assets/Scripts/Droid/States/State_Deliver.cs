@@ -37,11 +37,14 @@ public class State_Deliver : State
         NavNode targetNode = m_controller.CurrentTarget.ClosestNavNode;
         
         m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
-
+        
         if (!m_controller.WasSlapped && m_controller.DesignatedTarget == m_controller.CurrentTarget)
         {
-            m_malfunctionNode = Random.Range((int)(m_path.Count * 0.5f) - 1, m_path.Count);
-            m_willMalfunction = true;
+            if (Random.Range(0, 1) < LevelManager.Instance.BotSpawner.m_malfunctionPercentage)
+            {
+                m_malfunctionNode = Random.Range((int)(m_path.Count * 0.5f) - 1, m_path.Count);
+                m_willMalfunction = true;
+            }
         }
 
         if (!m_firstDeliver)
@@ -67,6 +70,10 @@ public class State_Deliver : State
                 onStateTransition?.Invoke(DroidStates.Slapped);
             }
         }
+        
+        if(LevelManager.Instance.m_isPaused)
+            return;
+        
         Vector3 dirToNode = m_path[m_currentNodeIndex].WorldPosition - m_controller.transform.position;
         dirToNode.y = 0;
 

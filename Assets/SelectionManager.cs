@@ -25,9 +25,12 @@ public class SelectionManager : MonoBehaviour
             {
                 if (hitDroid != m_selectedDroid)
                 {
-                    m_selectedDroid.SetHighlighted(false);
-                    m_selectedDroid.CurrentTarget.SetHighlighted(false);
-                    m_selectedDroid = null;
+                    if (!LevelManager.Instance.m_isPaused)
+                    {
+                        m_selectedDroid.SetHighlighted(false);
+                        m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                        m_selectedDroid = null;
+                    }
                 }
             }
             
@@ -50,9 +53,12 @@ public class SelectionManager : MonoBehaviour
             {
                 if (m_selectedDroid != null)
                 {
-                    m_selectedDroid.SetHighlighted(false);
-                    m_selectedDroid.CurrentTarget.SetHighlighted(false);
-                    m_selectedDroid = null;
+                    if (!LevelManager.Instance.m_isPaused)
+                    {
+                        m_selectedDroid.SetHighlighted(false);
+                        m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                        m_selectedDroid = null;
+                    }
                 }
             }
         }
@@ -60,8 +66,11 @@ public class SelectionManager : MonoBehaviour
         {
             if (m_selectedDroid != null)
             {
-                m_selectedDroid.SetHighlighted(false);
-                m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                if (!LevelManager.Instance.m_isPaused)
+                {
+                    m_selectedDroid.SetHighlighted(false);
+                    m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                }
             }
             m_selectedDroid = null;
             m_prevDroidBuilding = null;

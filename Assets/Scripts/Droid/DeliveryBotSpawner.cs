@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 [Serializable]
@@ -18,10 +19,10 @@ public class DeliveryBotSpawner : MonoBehaviour
     private List<Transform> m_spawnPoints;
 
     [SerializeField] 
-    private float m_correctAtStartPercentage = 0.8f;
+    public float m_correctAtStartPercentage = 0.8f;
 
     [SerializeField] 
-    private float m_malfunctionPercentage = 0.8f;
+    public float m_malfunctionPercentage = 0.8f;
     
     private float m_spawnTimer = 0;
 
@@ -37,7 +38,7 @@ public class DeliveryBotSpawner : MonoBehaviour
     private LevelData m_currentLevel = null;
 
     private int m_botsAlive = 0;
-    private bool m_canSpawn = false;
+    public bool m_canSpawn = true;
 
     public event Action OnAllBotsSpawnedAndDestroyed;
 
@@ -69,9 +70,9 @@ public class DeliveryBotSpawner : MonoBehaviour
         m_currentLevel = level;
 
         m_currentSpawnDelay = Random.Range(level.m_spawnDelayMin, level.m_spawnDelayMax);
+
         m_botsAlive = 0;
         m_spawnCount = 0;
-        m_canSpawn = true;
     }
 
     private void OnBotFinishedDelivery(DeliveryBot bot)
@@ -81,16 +82,19 @@ public class DeliveryBotSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (m_canSpawn)
+        if (m_currentLevel != null)
         {
-            if (m_spawnTimer < m_currentSpawnDelay)
+            if (m_canSpawn && m_spawnCount < m_currentLevel.m_amountDroids)
             {
-                m_spawnTimer += Time.deltaTime;
-            }
-            else
-            {
-                m_spawnTimer = 0;
-                Spawn();
+                if (m_spawnTimer < m_currentSpawnDelay)
+                {
+                    m_spawnTimer += Time.deltaTime;
+                }
+                else
+                {
+                    m_spawnTimer = 0;
+                    Spawn();
+                }   
             }   
         }
     }
@@ -127,7 +131,7 @@ public class DeliveryBotSpawner : MonoBehaviour
         spawnedBot.DesignatedTarget = GetRandomAvailableBuilding();
 
         spawnedBot.spawnData = spawnData;
-        if (Random.Range(0f, 1f) <= m_correctAtStartPercentage)
+        if (Random.Range(0f, 1f) < m_correctAtStartPercentage)
             spawnedBot.CurrentTarget = spawnedBot.DesignatedTarget;
         else
             spawnedBot.CurrentTarget = GetRandomAvailableBuilding(spawnedBot.DesignatedTarget);
@@ -147,7 +151,7 @@ public class DeliveryBotSpawner : MonoBehaviour
         spawnedBot.Init();
         
         m_currentSpawnDelay = Random.Range(m_currentLevel.m_spawnDelayMin, m_currentLevel.m_spawnDelayMax);
-
+        
         spawnData.m_botsInAction[spawnedBot.Name] = true;
 
         m_spawnCount++;

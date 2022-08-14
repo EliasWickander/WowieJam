@@ -892,11 +892,11 @@ MonoBehaviour:
     m_sceneToOpenOnEnter: Game_Scene
     m_soundTrack: {fileID: 11400000, guid: 3d0047519be7b464ca6436ba753599bb, type: 2}
     m_soundStartDelay: 0
-  - m_type: 2
+  - m_type: 3
     m_sceneToOpenOnEnter: 
     m_soundTrack: {fileID: 11400000, guid: 4de767a3b8562284dabb34667d64e08b, type: 2}
     m_soundStartDelay: 0
-  - m_type: 3
+  - m_type: 4
     m_sceneToOpenOnEnter: 
     m_soundTrack: {fileID: 11400000, guid: 60a668adaf7122f48b1a01f4f6c5e2e6, type: 2}
     m_soundStartDelay: 1

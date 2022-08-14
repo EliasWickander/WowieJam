@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [Serializable]
 public class LevelData
@@ -52,7 +53,13 @@ public class LevelManager : MonoBehaviour
     private AudioSource m_audioSource;
 
     private AudioClipData m_currentClip;
-    
+
+    public bool m_isPaused = false;
+
+    public bool m_allLevelsFinished = false;
+
+    public GameObject m_gameoverCanvas;
+    public GameObject m_winCanvas;
     
     private void Awake()
     {
@@ -115,6 +122,9 @@ public class LevelManager : MonoBehaviour
         else
         {
             GameManager.Instance.SetState(GameStateType.GameState_Lost);
+            
+            if(m_gameoverCanvas != null)
+                m_gameoverCanvas.SetActive(true);
             //game over 
         }
     }
@@ -135,6 +145,10 @@ public class LevelManager : MonoBehaviour
             GameManager.Instance.SetState(GameStateType.GameState_Win);
             Debug.Log("no more levels");
             //no more levels
+            m_allLevelsFinished = true;
+            
+            if(m_winCanvas != null)
+                m_winCanvas.SetActive(true);
         }
     }
     

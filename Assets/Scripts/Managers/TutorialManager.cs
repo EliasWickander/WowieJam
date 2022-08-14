@@ -7,7 +7,6 @@ public class TutorialManager : MonoBehaviour
 {
     public GameObject[] popUPs;
     [SerializeField] int PopUpIndex;
-    [SerializeField] GameObject Pspawner;
 
     // Start is called before the first frame update
     void Start()
