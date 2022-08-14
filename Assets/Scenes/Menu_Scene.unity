@@ -902,7 +902,7 @@ MonoBehaviour:
     m_soundStartDelay: 1
   - m_type: 2
     m_sceneToOpenOnEnter: Tutorial_Scene
-    m_soundTrack: {fileID: 11400000, guid: 60a668adaf7122f48b1a01f4f6c5e2e6, type: 2}
+    m_soundTrack: {fileID: 11400000, guid: 3d0047519be7b464ca6436ba753599bb, type: 2}
     m_soundStartDelay: 0
   m_startGameState: 0
 --- !u!4 &408495673

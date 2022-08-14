@@ -46,6 +46,7 @@ public class NavGrid : WorldGrid<NavNode>
         return closestNode;
     }
     
+    #if UNITY_EDITOR
     protected override void OnDrawGizmos()
     {
         if(!m_debug)
@@ -81,4 +82,5 @@ public class NavGrid : WorldGrid<NavNode>
         
         Gizmos.color = Color.white;
     }
+    #endif
 }

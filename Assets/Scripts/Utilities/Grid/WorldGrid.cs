@@ -36,6 +36,7 @@ public abstract class WorldGrid<TNode> : MonoBehaviour where TNode : GridNode, n
         m_grid = new Grid<TNode>(transform.position, m_worldSize, m_nodeRadius, m_is3D, false);
     }
     
+#if UNITY_EDITOR
     protected virtual void OnDrawGizmos()
     {
         if(!m_debug)
@@ -68,4 +69,5 @@ public abstract class WorldGrid<TNode> : MonoBehaviour where TNode : GridNode, n
         
         Gizmos.color = Color.white;
     }
+    #endif
 }
