@@ -20,6 +20,7 @@ public class State_Malfunction : State
     {
         m_shockTimer = 0;
         m_controller.CurrentTarget = LevelManager.Instance.BotSpawner.GetRandomAvailableBuilding(m_controller.DesignatedTarget);
+        AudioManager.Instance.PlayAudio(m_controller.m_audioSource, m_controller.m_botMalfunctioningClip, 0, m_controller.MalfunctionShockTime);
     }
 
     public override void OnTick()

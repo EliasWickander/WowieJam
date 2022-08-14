@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bf2897d377b803146b0386fb7b3770fc, type: 3}
+  m_Name: MenuSoundtrack
+  m_EditorClassIdentifier: 
+  m_audioClip: {fileID: 8300000, guid: 195fc8f804066d5419ccd5b466410b40, type: 3}
+  m_group: {fileID: 11400000, guid: 2aad0ab3fb27d144bba9488ce35f19e3, type: 2}

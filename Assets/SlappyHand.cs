@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+[RequireComponent(typeof(AudioSource))]
 public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerMoveHandler
 {
     private RectTransform m_rectTransform;
@@ -13,16 +14,25 @@ public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
     public LayerMask m_supervisorMask;
     public Camera m_supervisorCamera;
+
+    public AudioClipData m_slapClip;
+    public AudioClipData m_grabClip;
+    public AudioClipData m_letGoClip;
+    private AudioSource m_audioSource;
+    
     
     private void Awake()
     {
         m_rectTransform = GetComponent<RectTransform>();
+
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         m_startPos = m_rectTransform.position;
 
+        AudioManager.Instance.PlayAudio(m_audioSource, m_grabClip);
         m_dragging = true;
     }
 
@@ -44,7 +54,12 @@ public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, m_supervisorMask))
         {
+            AudioManager.Instance.PlayAudio(m_audioSource, m_slapClip);
             hitInfo.collider.GetComponent<DeliverySupervisor>().AskForSlap();
+        }
+        else
+        {
+            AudioManager.Instance.PlayAudio(m_audioSource, m_letGoClip);
         }
     }
 }

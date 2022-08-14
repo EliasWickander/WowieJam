@@ -15,6 +15,7 @@ public class LevelData
     public List<BotSpawnData> m_availableBotsData;
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
@@ -44,6 +45,15 @@ public class LevelManager : MonoBehaviour
 
     private bool m_transitioningToNextLevel = false;
     private float m_transitionTimer = 0;
+
+    public AudioClipData m_finishedLevelClip;
+    public AudioClipData m_botMistakeClip;
+
+    private AudioSource m_audioSource;
+
+    private AudioClipData m_currentClip;
+    
+    
     private void Awake()
     {
         Instance = this;
@@ -51,6 +61,8 @@ public class LevelManager : MonoBehaviour
         m_botSpawner = FindObjectOfType<DeliveryBotSpawner>();
         m_navGrid = FindObjectOfType<NavGrid>();
         m_mistakes = 0;
+
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -95,9 +107,15 @@ public class LevelManager : MonoBehaviour
         m_mistakes++;
 
         OnMistakeAdded?.Invoke();
-        if (m_mistakes >= 3)
+
+        if (m_mistakes < 3)
         {
-            //game over
+            AudioManager.Instance.PlayAudio(m_audioSource, m_botMistakeClip);
+        }
+        else
+        {
+            GameManager.Instance.SetState(GameStateType.GameState_Lost);
+            //game over 
         }
     }
 
@@ -108,13 +126,18 @@ public class LevelManager : MonoBehaviour
             m_nextLevel = m_levels[m_currentLevelIndex + 1];
             m_transitionTimer = 0;
             m_transitioningToNextLevel = true;   
+            
+            if(m_currentLevelIndex != -1)
+                AudioManager.Instance.PlayAudio(m_audioSource, m_finishedLevelClip);
         }
         else
         {
+            GameManager.Instance.SetState(GameStateType.GameState_Win);
             Debug.Log("no more levels");
             //no more levels
         }
     }
+    
     public void NextLevel()
     {
         Debug.Log("start level " + m_nextLevel.m_levelName);

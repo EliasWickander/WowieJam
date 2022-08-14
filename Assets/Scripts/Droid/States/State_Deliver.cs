@@ -14,6 +14,9 @@ public class State_Deliver : State
 
     private int m_malfunctionNode = -1;
     private bool m_willMalfunction = false;
+
+    private float m_transitionTimer = 0;
+    private bool m_isGettingSlapped = false;
     
     public State_Deliver(DeliveryBot controller) : base(controller.gameObject)
     {
@@ -21,8 +24,12 @@ public class State_Deliver : State
     }
 
     public override event Action<Enum> onStateTransition;
+
+    private bool m_firstDeliver = false;
     public override void OnEnter(State prevState, object[] param)
     {
+        m_isGettingSlapped = false;
+        m_transitionTimer = 0;
         m_controller.OnSlapped += OnSlapped;
 
         m_currentNodeIndex = -1;
@@ -36,12 +43,30 @@ public class State_Deliver : State
             m_malfunctionNode = Random.Range((int)(m_path.Count * 0.5f) - 1, m_path.Count);
             m_willMalfunction = true;
         }
-        
+
+        if (!m_firstDeliver)
+        {
+            m_firstDeliver = true;
+            AudioManager.Instance.PlayAudio(m_controller.m_audioSource, m_controller.m_botDepartingClip);
+        }
+
         NextNode();
     }
 
     public override void OnTick()
     {
+        if (m_isGettingSlapped)
+        {
+            if (m_transitionTimer < 0.5f)
+            {
+                m_transitionTimer += Time.deltaTime;
+            }
+            else
+            {
+                m_transitionTimer = 0;
+                onStateTransition?.Invoke(DroidStates.Slapped);
+            }
+        }
         Vector3 dirToNode = m_path[m_currentNodeIndex].WorldPosition - m_controller.transform.position;
         dirToNode.y = 0;
 
@@ -55,15 +80,6 @@ public class State_Deliver : State
             
             if (!NextNode())
             {
-                if (m_controller.CurrentTarget != m_controller.DesignatedTarget)
-                {
-                    LevelManager.Instance.AddMistake();
-                }
-                else
-                {
-                    m_controller.FinishedDeliveryCallback();
-                }
-                
                 onStateTransition?.Invoke(DroidStates.Return);
                 return;
             }
@@ -78,6 +94,11 @@ public class State_Deliver : State
 
     public override void OnExit(State nextState)
     {
+        if (nextState == m_controller.StateMachine.m_states[DroidStates.Return] &&
+            m_controller.CurrentTarget != m_controller.DesignatedTarget)
+        {
+            LevelManager.Instance.AddMistake();
+        }
         m_controller.OnSlapped -= OnSlapped;
         m_willMalfunction = false;
         m_malfunctionNode = -1;
@@ -85,7 +106,7 @@ public class State_Deliver : State
     
     private void OnSlapped()
     {
-        onStateTransition?.Invoke(DroidStates.Slapped);
+        m_isGettingSlapped = true;
     }
     
     private bool NextNode()

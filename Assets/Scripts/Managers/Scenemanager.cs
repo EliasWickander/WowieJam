@@ -26,6 +26,6 @@ public class Scenemanager : MonoBehaviour
     }
     public void playgamescene()
     {
-        SceneManager.LoadScene(1);
+        GameManager.Instance.SetState(GameStateType.GameState_Playing);
     }
 }

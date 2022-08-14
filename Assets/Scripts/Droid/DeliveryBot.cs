@@ -20,6 +20,7 @@ public enum DroidType
     Blue
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class DeliveryBot : MonoBehaviour
 {
     [HideInInspector]
@@ -64,6 +65,10 @@ public class DeliveryBot : MonoBehaviour
     private StateMachine m_stateMachine;
     public StateMachine StateMachine => m_stateMachine;
 
+    public AudioClipData m_aiSorryClip;
+    public AudioClipData m_botDepartingClip;
+    public AudioClipData m_botMalfunctioningClip;
+
     public event Action<DeliveryBot> OnDestroyed;
 
     public event Action OnSlapped;
@@ -72,9 +77,12 @@ public class DeliveryBot : MonoBehaviour
 
     public bool WasSlapped { get; set; }
 
+    public AudioSource m_audioSource;
+
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
+        m_audioSource = GetComponent<AudioSource>();
     }
     
     public void Init()

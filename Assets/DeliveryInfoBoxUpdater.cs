@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class DeliveryInfoBoxUpdater : MonoBehaviour
 {
     [SerializeField] 
@@ -17,9 +18,14 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
     private Dictionary<DeliveryBot, DeliveryInfoBox> m_infoBoxesDisplayed = new Dictionary<DeliveryBot, DeliveryInfoBox>();
     
     private Dictionary<DeliveryBot, DeliveryInfoBox> m_infoBoxesInQueue = new Dictionary<DeliveryBot, DeliveryInfoBox>();
+
+    private AudioSource m_audioSource;
+    public AudioClipData m_newOrderClip;
+    
     private void Awake()
     {
         m_deliveryBotSpawner = FindObjectOfType<DeliveryBotSpawner>();
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     private void OnEnable()
@@ -44,6 +50,7 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
         if (m_infoBoxesDisplayed.Count < m_maxBoxesAtOnce)
         {
             m_infoBoxesDisplayed.Add(bot, newInfoBox);   
+            AudioManager.Instance.PlayAudio(m_audioSource, m_newOrderClip);
         }
         else
         {
@@ -79,6 +86,7 @@ public class DeliveryInfoBoxUpdater : MonoBehaviour
             newBoxPair.Value.gameObject.SetActive(true);
             m_infoBoxesDisplayed.Add(newBoxPair.Key, newBoxPair.Value);
             m_infoBoxesInQueue.Remove(newBoxPair.Key);
+            AudioManager.Instance.PlayAudio(m_audioSource, m_newOrderClip);
         }
     }
 }
