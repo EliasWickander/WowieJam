@@ -19,6 +19,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance { get; private set; }
 
     private Dictionary<AudioSource, PlayedAudioData> m_activeSources = new Dictionary<AudioSource, PlayedAudioData>();
+    
     private void Awake()
     {
         Instance = this;
@@ -30,6 +31,19 @@ public class AudioManager : MonoBehaviour
     public void SetMasterVolume(float volume)
     {
         m_masterVolume = Mathf.Clamp01(volume);
+        
+        foreach (KeyValuePair<AudioSource, PlayedAudioData> pair in m_activeSources)
+        {
+            if (pair.Key != null)
+            {
+                float groupVolume = Mathf.Clamp01(pair.Value.clipData.m_group.m_volume);
+
+                if (groupVolume > m_masterVolume)
+                    pair.Key.volume = m_masterVolume;
+                else
+                    pair.Key.volume = m_masterVolume - (m_masterVolume - groupVolume);
+            }
+        }
     }
     
     public void PlayAudio(AudioClipData clip)
@@ -80,8 +94,14 @@ public class AudioManager : MonoBehaviour
         
         m_activeSources[audioSource].m_currentDuration = 0;
         audioSource.clip = clip.m_audioClip;
-        audioSource.volume = m_masterVolume - (m_masterVolume - Mathf.Clamp01(clip.m_group.m_volume));
+
+        float groupVolume = Mathf.Clamp01(clip.m_group.m_volume);
         
+        if (groupVolume > m_masterVolume)
+            audioSource.volume = m_masterVolume;
+        else
+            audioSource.volume = m_masterVolume - (m_masterVolume - groupVolume);
+
         if(delay == 0)
             audioSource.Play();
         else
@@ -89,8 +109,22 @@ public class AudioManager : MonoBehaviour
         
         clip.m_group.OnVolumeChanged += OnGroupVolumeChanged;
     }
-    public void OnGroupVolumeChanged(float volume)
+    public void OnGroupVolumeChanged(float volume, AudioGroupData data)
     {
-        m_audioSource.volume = m_masterVolume - (m_masterVolume - Mathf.Clamp01(volume));
+        foreach (KeyValuePair<AudioSource, PlayedAudioData> pair in m_activeSources)
+        {
+            if (pair.Key != null)
+            {
+                if (pair.Value.clipData.m_group == data)
+                {
+                    float groupVolume = Mathf.Clamp01(pair.Value.clipData.m_group.m_volume);
+
+                    if (groupVolume > m_masterVolume)
+                        pair.Key.volume = m_masterVolume;
+                    else
+                        pair.Key.volume = m_masterVolume - (m_masterVolume - groupVolume);
+                }
+            }
+        }
     }
 }
