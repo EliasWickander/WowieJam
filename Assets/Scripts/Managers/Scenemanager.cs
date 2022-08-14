@@ -31,7 +31,7 @@ public class Scenemanager : MonoBehaviour
 
     public void RestartScene()
     {
-        GameManager.Instance.RestartState();
+        GameManager.Instance.RestartGameScene();
     }
     public void BackToMainMenu()
     {

@@ -70,11 +70,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RestartState()
+    public void RestartGameScene()
     {
+        m_currentGameState = m_gameStatesDictionary[GameStateType.GameState_Playing];
+        
         if(m_currentGameState.m_soundTrack != null)
             AudioManager.Instance.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
-        
+
         SceneManager.LoadScene(m_currentGameState.m_sceneToOpenOnEnter);
     }
 }
