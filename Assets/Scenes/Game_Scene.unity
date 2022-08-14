@@ -808,7 +808,7 @@ Camera:
     x: 0.399
     y: 0.069
     width: 0.47
-    height: 0.3
+    height: 0.28
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 58.9
@@ -13607,11 +13607,11 @@ MonoBehaviour:
     m_startDelay: 1
     m_availableBotsData:
     - m_botPrefab: {fileID: 6226792030552596346, guid: ae04693d1d81f624796f166a257a0247, type: 3}
-      m_amount: 8
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: 514e3a81aa1737742a14a322b25ab90e, type: 3}
-      m_amount: 8
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: c6a0fc6e0f3705a4299b71e799acdc5d, type: 3}
-      m_amount: 8
+      m_amount: 5
   - m_levelName: 04
     m_amountDroids: 5
     m_spawnDelayMin: 1
@@ -13619,23 +13619,35 @@ MonoBehaviour:
     m_startDelay: 1
     m_availableBotsData:
     - m_botPrefab: {fileID: 6226792030552596346, guid: ae04693d1d81f624796f166a257a0247, type: 3}
-      m_amount: 13
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: 514e3a81aa1737742a14a322b25ab90e, type: 3}
-      m_amount: 13
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: c6a0fc6e0f3705a4299b71e799acdc5d, type: 3}
-      m_amount: 13
+      m_amount: 5
   - m_levelName: 05
-    m_amountDroids: 5
+    m_amountDroids: 6
     m_spawnDelayMin: 1
     m_spawnDelayMax: 2
     m_startDelay: 1
     m_availableBotsData:
     - m_botPrefab: {fileID: 6226792030552596346, guid: ae04693d1d81f624796f166a257a0247, type: 3}
-      m_amount: 15
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: 514e3a81aa1737742a14a322b25ab90e, type: 3}
-      m_amount: 15
+      m_amount: 5
     - m_botPrefab: {fileID: 6226792030552596346, guid: c6a0fc6e0f3705a4299b71e799acdc5d, type: 3}
-      m_amount: 15
+      m_amount: 5
+  - m_levelName: 06
+    m_amountDroids: 6
+    m_spawnDelayMin: 1
+    m_spawnDelayMax: 2
+    m_startDelay: 1
+    m_availableBotsData:
+    - m_botPrefab: {fileID: 6226792030552596346, guid: ae04693d1d81f624796f166a257a0247, type: 3}
+      m_amount: 5
+    - m_botPrefab: {fileID: 6226792030552596346, guid: 514e3a81aa1737742a14a322b25ab90e, type: 3}
+      m_amount: 5
+    - m_botPrefab: {fileID: 6226792030552596346, guid: c6a0fc6e0f3705a4299b71e799acdc5d, type: 3}
+      m_amount: 5
   m_finishedLevelClip: {fileID: 11400000, guid: ab3354885c0eb0f4c9a38243eeed7b16, type: 2}
   m_botMistakeClip: {fileID: 11400000, guid: dbd3a882535917143b3c3441236a8e29, type: 2}
 --- !u!114 &2112416109
