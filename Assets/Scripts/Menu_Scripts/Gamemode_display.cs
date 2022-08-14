@@ -56,8 +56,15 @@ public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitH
     }
     public void OnPointerExit(PointerEventData eventData)
     {
-        InformationPanel.SetActive(false);
+        DisablePanel();
     }
+
+    public void DisablePanel()
+    {
+        if(InformationPanel.activeSelf)
+            InformationPanel.SetActive(false);
+    }
+    
     private void OnMouseExit()
     {
         

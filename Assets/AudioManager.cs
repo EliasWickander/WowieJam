@@ -14,12 +14,12 @@ public class PlayedAudioData
 public class AudioManager : MonoBehaviour
 {
     public AudioSource m_audioSource;
-
-    public float m_masterVolume = 1;
+    
     public static AudioManager Instance { get; private set; }
 
     private Dictionary<AudioSource, PlayedAudioData> m_activeSources = new Dictionary<AudioSource, PlayedAudioData>();
-    
+
+    public AudioGroupData m_masterGroup;
     private void Awake()
     {
         Instance = this;
@@ -30,18 +30,17 @@ public class AudioManager : MonoBehaviour
 
     public void SetMasterVolume(float volume)
     {
-        m_masterVolume = Mathf.Clamp01(volume);
-        
+        m_masterGroup.m_volume = Mathf.Clamp01(volume);
+
         foreach (KeyValuePair<AudioSource, PlayedAudioData> pair in m_activeSources)
         {
             if (pair.Key != null)
             {
                 float groupVolume = Mathf.Clamp01(pair.Value.clipData.m_group.m_volume);
 
-                if (groupVolume > m_masterVolume)
-                    pair.Key.volume = m_masterVolume;
-                else
-                    pair.Key.volume = m_masterVolume - (m_masterVolume - groupVolume);
+                float maxVolume = m_masterGroup.m_volume < groupVolume ? m_masterGroup.m_volume : groupVolume;
+                    
+                pair.Key.volume = Mathf.Lerp(0, maxVolume, volume);
             }
         }
     }
@@ -97,10 +96,10 @@ public class AudioManager : MonoBehaviour
 
         float groupVolume = Mathf.Clamp01(clip.m_group.m_volume);
         
-        if (groupVolume > m_masterVolume)
-            audioSource.volume = m_masterVolume;
+        if (groupVolume > m_masterGroup.m_volume)
+            audioSource.volume = m_masterGroup.m_volume;
         else
-            audioSource.volume = m_masterVolume - (m_masterVolume - groupVolume);
+            audioSource.volume = m_masterGroup.m_volume - (m_masterGroup.m_volume - groupVolume);
 
         if(delay == 0)
             audioSource.Play();
@@ -119,10 +118,9 @@ public class AudioManager : MonoBehaviour
                 {
                     float groupVolume = Mathf.Clamp01(pair.Value.clipData.m_group.m_volume);
 
-                    if (groupVolume > m_masterVolume)
-                        pair.Key.volume = m_masterVolume;
-                    else
-                        pair.Key.volume = m_masterVolume - (m_masterVolume - groupVolume);
+                    float maxVolume = m_masterGroup.m_volume < groupVolume ? m_masterGroup.m_volume : groupVolume;
+                    
+                    pair.Key.volume = Mathf.Lerp(0, maxVolume, volume);
                 }
             }
         }

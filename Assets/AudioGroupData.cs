@@ -7,9 +7,8 @@ using UnityEngine;
 public class AudioGroupData : ScriptableObject
 {
     public float m_volume;
-
     public event Action<float, AudioGroupData> OnVolumeChanged;
-    
+
     public void SetVolume(float volume)
     {
         m_volume = volume;
