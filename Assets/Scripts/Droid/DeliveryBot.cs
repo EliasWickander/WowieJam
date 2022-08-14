@@ -69,6 +69,8 @@ public class DeliveryBot : MonoBehaviour
     public AudioClipData m_botDepartingClip;
     public AudioClipData m_botMalfunctioningClip;
 
+    public GameObject m_sparkVFX;
+
     public event Action<DeliveryBot> OnDestroyed;
 
     public event Action OnSlapped;
@@ -132,5 +134,12 @@ public class DeliveryBot : MonoBehaviour
     {
         OnDestroyed?.Invoke(this);
         Destroy(gameObject);
+    }
+
+    public IEnumerator StartSparks()
+    {
+        m_sparkVFX.SetActive(true);
+        yield return new WaitForSeconds(m_malfunctionShockTime);
+        m_sparkVFX.SetActive(false);
     }
 }

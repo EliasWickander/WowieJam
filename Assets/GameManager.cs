@@ -18,6 +18,7 @@ public enum GameStateType
 {
     GameState_Menu,
     GameState_Playing,
+    GameState_Tutorial,
     GameState_Lost,
     GameState_Win,
 }
@@ -47,6 +48,7 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
 
+        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
         foreach (GameState state in m_gameStates)
         {
             m_gameStatesDictionary.Add(state.m_type, state);

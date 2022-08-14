@@ -18,7 +18,7 @@ public class Scenemanager : MonoBehaviour
     }
     public void Tutorialload()
     {
-        //Loadscene
+        GameManager.Instance.SetState(GameStateType.GameState_Tutorial);
     }
     public void quit()
     {
