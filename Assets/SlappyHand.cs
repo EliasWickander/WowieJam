@@ -12,6 +12,8 @@ public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
     private bool m_dragging = false;
 
     public LayerMask m_supervisorMask;
+    public Camera m_supervisorCamera;
+    
     private void Awake()
     {
         m_rectTransform = GetComponent<RectTransform>();
@@ -38,7 +40,7 @@ public class SlappyHand : MonoBehaviour, IPointerDownHandler, IPointerUpHandler,
 
         m_dragging = false;
 
-        Ray ray = Camera.main.ScreenPointToRay(eventData.position);
+        Ray ray = m_supervisorCamera.ScreenPointToRay(eventData.position);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, m_supervisorMask))
         {
