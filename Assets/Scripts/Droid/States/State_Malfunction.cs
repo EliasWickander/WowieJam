@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class State_Slapped : State
+public class State_Malfunction : State
 {
     private DeliveryBot m_controller;
     
-    public State_Slapped(DeliveryBot controller) : base(controller.gameObject)
+    public State_Malfunction(DeliveryBot controller) : base(controller.gameObject)
     {
         m_controller = controller;
     }
@@ -19,14 +19,12 @@ public class State_Slapped : State
     public override void OnEnter(State prevState, object[] param)
     {
         m_shockTimer = 0;
-        m_controller.CurrentTarget = m_controller.DesignatedTarget;
-
-        m_controller.WasSlapped = true;
+        m_controller.CurrentTarget = LevelManager.Instance.BotSpawner.GetRandomAvailableBuilding(m_controller.DesignatedTarget);
     }
 
     public override void OnTick()
     {
-        if (m_shockTimer < m_controller.SlapShockTime)
+        if (m_shockTimer < m_controller.MalfunctionShockTime)
         {
             m_shockTimer += Time.deltaTime;
         }

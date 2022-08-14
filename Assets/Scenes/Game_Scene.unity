@@ -6119,7 +6119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bee1cd8822216349bdc370f22efd1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_maxBoxesAtOnce: 3
+  m_maxBoxesAtOnce: 5
   m_infoBoxPrefab: {fileID: 4827995827921712279, guid: 7c80bd1b31fc42c4a96aeaf60e76edfa, type: 3}
 --- !u!114 &1555178465
 MonoBehaviour:
@@ -7642,9 +7642,9 @@ MonoBehaviour:
   m_buildingManager: {fileID: 2112416107}
   m_levels:
   - m_levelName: 01
-    m_amountDroids: 2
-    m_spawnDelayMin: 1
-    m_spawnDelayMax: 1
+    m_amountDroids: 5
+    m_spawnDelayMin: 5
+    m_spawnDelayMax: 7
     m_startDelay: 1
     m_availableBotsData:
     - m_botPrefab: {fileID: 6226792030552596346, guid: ae04693d1d81f624796f166a257a0247, type: 3}
@@ -7654,7 +7654,7 @@ MonoBehaviour:
     - m_botPrefab: {fileID: 6226792030552596346, guid: c6a0fc6e0f3705a4299b71e799acdc5d, type: 3}
       m_amount: 5
   - m_levelName: 02
-    m_amountDroids: 2
+    m_amountDroids: 5
     m_spawnDelayMin: 1
     m_spawnDelayMax: 2
     m_startDelay: 1
@@ -7677,12 +7677,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ef3b21e7b106f5418ab4b3b2f8dd9ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_botSpawnData: []
   m_spawnPoints:
   - {fileID: 1215081834}
   - {fileID: 414165858}
   - {fileID: 863747602}
-  m_correctAtStartPercentage: 0.2
+  m_correctAtStartPercentage: 0.8
+  m_malfunctionPercentage: 0.5
 --- !u!114 &2112416110
 MonoBehaviour:
   m_ObjectHideFlags: 0

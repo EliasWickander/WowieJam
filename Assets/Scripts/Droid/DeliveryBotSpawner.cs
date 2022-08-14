@@ -14,14 +14,15 @@ public class BotSpawnData
 
 public class DeliveryBotSpawner : MonoBehaviour
 {
-    public List<BotSpawnData> m_botSpawnData;
-    
     [SerializeField] 
     private List<Transform> m_spawnPoints;
 
     [SerializeField] 
     private float m_correctAtStartPercentage = 0.8f;
 
+    [SerializeField] 
+    private float m_malfunctionPercentage = 0.8f;
+    
     private float m_spawnTimer = 0;
 
     private float m_currentSpawnDelay = 0;
@@ -167,7 +168,7 @@ public class DeliveryBotSpawner : MonoBehaviour
         }
     }
 
-    private Building GetRandomAvailableBuilding(Building ignoredBuilding = null)
+    public Building GetRandomAvailableBuilding(Building ignoredBuilding = null)
     {
         List<Building> availableBuildings = new List<Building>(m_buildingManager.Buildings);
         

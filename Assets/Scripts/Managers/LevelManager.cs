@@ -25,6 +25,7 @@ public class LevelManager : MonoBehaviour
     public BuildingManager BuildingManager => m_buildingManager;
 
     private DeliveryBotSpawner m_botSpawner;
+    public DeliveryBotSpawner BotSpawner => m_botSpawner;
     public List<LevelData> m_levels;
     
     private NavGrid m_navGrid;

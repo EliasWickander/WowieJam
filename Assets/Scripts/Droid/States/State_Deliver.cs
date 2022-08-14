@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class State_Deliver : State
 {
@@ -10,6 +11,9 @@ public class State_Deliver : State
     private List<PathNode> m_path = null;
 
     private int m_currentNodeIndex = -1;
+
+    private int m_malfunctionNode = -1;
+    private bool m_willMalfunction = false;
     
     public State_Deliver(DeliveryBot controller) : base(controller.gameObject)
     {
@@ -26,6 +30,13 @@ public class State_Deliver : State
         NavNode targetNode = m_controller.CurrentTarget.ClosestNavNode;
         
         m_path = m_controller.Pathfinding.FindPath(m_controller.transform.position, targetNode.WorldPosition);
+
+        if (!m_controller.WasSlapped && m_controller.DesignatedTarget == m_controller.CurrentTarget)
+        {
+            m_malfunctionNode = Random.Range((int)(m_path.Count * 0.5f) - 1, m_path.Count);
+            m_willMalfunction = true;
+        }
+        
         NextNode();
     }
 
@@ -36,6 +47,12 @@ public class State_Deliver : State
 
         if (dirToNode.magnitude < 0.2f)
         {
+            if (m_currentNodeIndex == m_malfunctionNode)
+            {
+                onStateTransition?.Invoke(DroidStates.Malfunction);
+                return;
+            }
+            
             if (!NextNode())
             {
                 if (m_controller.CurrentTarget != m_controller.DesignatedTarget)
@@ -62,6 +79,8 @@ public class State_Deliver : State
     public override void OnExit(State nextState)
     {
         m_controller.OnSlapped -= OnSlapped;
+        m_willMalfunction = false;
+        m_malfunctionNode = -1;
     }
     
     private void OnSlapped()

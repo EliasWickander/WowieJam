@@ -9,6 +9,7 @@ public enum DroidStates
     Deliver,
     Return,
     Slapped,
+    Malfunction,
     End,
 }
 
@@ -32,6 +33,8 @@ public class DeliveryBot : MonoBehaviour
 
     [SerializeField] 
     private float m_slapShockTime = 1;
+    
+    private float m_malfunctionShockTime = 1;
 
     [SerializeField] 
     private GameObject m_highlightObject;
@@ -42,6 +45,7 @@ public class DeliveryBot : MonoBehaviour
     public DroidType DroidType => m_type;
     
     public float SlapShockTime => m_slapShockTime;
+    public float MalfunctionShockTime => m_malfunctionShockTime;
 
     public string Prefix => m_prefix;
     
@@ -65,7 +69,9 @@ public class DeliveryBot : MonoBehaviour
     public event Action OnSlapped;
 
     public event Action<DeliveryBot> OnFinishedDelivery;
-    
+
+    public bool WasSlapped { get; set; }
+
     private void Awake()
     {
         m_pathfinding = FindObjectOfType<Pathfinding>();
@@ -89,7 +95,8 @@ public class DeliveryBot : MonoBehaviour
             {DroidStates.Deliver, new State_Deliver(this)},
             {DroidStates.Return, new State_Return(this)},
             {DroidStates.End, new State_End(this)},
-            {DroidStates.Slapped, new State_Slapped(this)}
+            {DroidStates.Slapped, new State_Slapped(this)},
+            {DroidStates.Malfunction, new State_Malfunction(this)}
         };
         
         m_stateMachine = new StateMachine(states);
