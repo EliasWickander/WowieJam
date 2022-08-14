@@ -13912,7 +13912,7 @@ MonoBehaviour:
   - {fileID: 1215081834}
   - {fileID: 414165858}
   - {fileID: 863747602}
-  m_correctAtStartPercentage: 1
+  m_correctAtStartPercentage: 0.6
   m_malfunctionPercentage: 0.5
   m_canSpawn: 1
 --- !u!114 &2112416110
