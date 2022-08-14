@@ -38,6 +38,7 @@ public class State_Slapped : State
                 if (m_saidSorry == false)
                 {
                     m_saidSorry = true;
+                    m_controller.m_exclamationMarkObject.SetActive(true);
                     AudioManager.Instance.PlayAudio(m_controller.m_audioSource, m_controller.m_aiSorryClip);
                 }
             }
