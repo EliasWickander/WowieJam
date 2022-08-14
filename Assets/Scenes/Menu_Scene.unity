@@ -1667,8 +1667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modename: Tutorial
-  modedescription: Thing get serious,the city Layout is different each day and the
-    bots are faster and more prone to error!
+  modedescription: Learn The basics of the game!
   m_bindedButton: {fileID: 841986264}
 --- !u!114 &841986262
 MonoBehaviour:
@@ -2563,8 +2562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modename: Play
-  modedescription: Learn and play a workweek of 5 days,From 6 am to 1 pm check ot
-    the deliveries of different bots in the city
+  modedescription: Check up the deliveries!Survive until the end of the workday!
   m_bindedButton: {fileID: 1227997331}
 --- !u!114 &1227997329
 MonoBehaviour:
