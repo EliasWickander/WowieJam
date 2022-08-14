@@ -77,6 +77,9 @@ public class DeliveryBot : MonoBehaviour
 
     public bool WasSlapped { get; set; }
 
+    public GameObject m_exclamationMarkObject = null;
+    
+    [HideInInspector]
     public AudioSource m_audioSource;
 
     private void Awake()
