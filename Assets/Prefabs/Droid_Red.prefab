@@ -244,7 +244,7 @@ MonoBehaviour:
     m_botPrefab: {fileID: 0}
     m_amount: 5
   m_prefix: R
-  m_type: 0
-  m_moveSpeed: 5
+  m_moveSpeed: 20
   m_slapShockTime: 1
   m_highlightObject: {fileID: 2145372466835110948}
+  m_type: 0

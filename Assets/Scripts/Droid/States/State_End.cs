@@ -15,8 +15,6 @@ public class State_End : State
     public override event Action<Enum> onStateTransition;
     public override void OnEnter(State prevState, object[] param)
     {
-        Debug.Log("Done");
-        
         m_controller.Destroy();
     }
 

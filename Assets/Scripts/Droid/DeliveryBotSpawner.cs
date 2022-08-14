@@ -14,23 +14,13 @@ public class BotSpawnData
 
 public class DeliveryBotSpawner : MonoBehaviour
 {
-    [SerializeField] 
-    private List<BotSpawnData> m_botSpawnData;
+    public List<BotSpawnData> m_botSpawnData;
     
     [SerializeField] 
     private List<Transform> m_spawnPoints;
 
     [SerializeField] 
     private float m_correctAtStartPercentage = 0.8f;
-
-    [SerializeField] 
-    private float m_spawnDelayMin = 0.5f;
-    
-    [SerializeField] 
-    private float m_spawnDelayMax = 2;
-
-    [SerializeField] 
-    private float m_startSpawnDelay = 1;
 
     private float m_spawnTimer = 0;
 
@@ -41,10 +31,33 @@ public class DeliveryBotSpawner : MonoBehaviour
     public event Action<DeliveryBot> OnBotSpawned;
 
     public event Action<DeliveryBot> OnBotDelivered;
+    
+    private int m_spawnCount = 0;
+    private LevelData m_currentLevel = null;
+
+    private int m_botsAlive = 0;
+    private bool m_canSpawn = false;
+
+    public event Action OnAllBotsSpawnedAndDestroyed;
 
     private void Awake()
     {
-        foreach (BotSpawnData spawnData in m_botSpawnData)
+        m_buildingManager = LevelManager.Instance.BuildingManager;
+    }
+
+    private void OnEnable()
+    {
+        LevelManager.Instance.OnLevelStart += OnLevelStart;
+    }
+
+    private void OnDisable()
+    {
+        LevelManager.Instance.OnLevelStart -= OnLevelStart;
+    }
+
+    private void OnLevelStart(LevelData level)
+    {
+        foreach (BotSpawnData spawnData in level.m_availableBotsData)
         {
             for (int i = 0; i < spawnData.m_amount; i++)
             {
@@ -52,9 +65,12 @@ public class DeliveryBotSpawner : MonoBehaviour
             }
         }
         
-        m_buildingManager = LevelManager.Instance.BuildingManager;
+        m_currentLevel = level;
 
-        m_currentSpawnDelay = m_startSpawnDelay;
+        m_currentSpawnDelay = Random.Range(level.m_spawnDelayMin, level.m_spawnDelayMax);
+        m_botsAlive = 0;
+        m_spawnCount = 0;
+        m_canSpawn = true;
     }
 
     private void OnBotFinishedDelivery(DeliveryBot bot)
@@ -64,14 +80,17 @@ public class DeliveryBotSpawner : MonoBehaviour
 
     private void Update()
     {
-        if (m_spawnTimer < m_currentSpawnDelay)
+        if (m_canSpawn)
         {
-            m_spawnTimer += Time.deltaTime;
-        }
-        else
-        {
-            m_spawnTimer = 0;
-            Spawn();
+            if (m_spawnTimer < m_currentSpawnDelay)
+            {
+                m_spawnTimer += Time.deltaTime;
+            }
+            else
+            {
+                m_spawnTimer = 0;
+                Spawn();
+            }   
         }
     }
 
@@ -79,7 +98,7 @@ public class DeliveryBotSpawner : MonoBehaviour
     {
         List<BotSpawnData> availableSpawnData = new List<BotSpawnData>();
 
-        foreach (BotSpawnData botSpawnData in m_botSpawnData)
+        foreach (BotSpawnData botSpawnData in m_currentLevel.m_availableBotsData)
         {
             for (int i = 0; i < botSpawnData.m_amount; i++)
             {
@@ -90,7 +109,6 @@ public class DeliveryBotSpawner : MonoBehaviour
                 }
             }
         }
-
         
         if (availableSpawnData.Count <= 0)
         {
@@ -126,16 +144,27 @@ public class DeliveryBotSpawner : MonoBehaviour
         spawnedBot.OnDestroyed += OnBotDestroyed;
         OnBotSpawned?.Invoke(spawnedBot);
         spawnedBot.Init();
-
-        m_currentSpawnDelay = Random.Range(m_spawnDelayMin, m_spawnDelayMax);
+        
+        m_currentSpawnDelay = Random.Range(m_currentLevel.m_spawnDelayMin, m_currentLevel.m_spawnDelayMax);
 
         spawnData.m_botsInAction[spawnedBot.Name] = true;
+
+        m_spawnCount++;
+        m_botsAlive++;
+        if (m_spawnCount >= m_currentLevel.m_amountDroids)
+            m_canSpawn = false;
     }
 
     private void OnBotDestroyed(DeliveryBot bot)
     {
         bot.spawnData.m_botsInAction[bot.Name] = false;
         bot.OnFinishedDelivery -= OnBotFinishedDelivery;
+        m_botsAlive--;
+
+        if (m_botsAlive <= 0 && m_spawnCount >= m_currentLevel.m_amountDroids)
+        {
+            OnAllBotsSpawnedAndDestroyed?.Invoke();
+        }
     }
 
     private Building GetRandomAvailableBuilding(Building ignoredBuilding = null)

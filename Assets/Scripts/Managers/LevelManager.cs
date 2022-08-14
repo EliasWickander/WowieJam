@@ -3,6 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public class LevelData
+{
+    public string m_levelName;
+    public int m_amountDroids = 5;
+    public float m_spawnDelayMin = 1;
+    public float m_spawnDelayMax = 3;
+    public float m_startDelay = 1;
+
+    public List<BotSpawnData> m_availableBotsData;
+}
+
 public class LevelManager : MonoBehaviour
 {
     public static LevelManager Instance { get; private set; }
@@ -11,6 +23,9 @@ public class LevelManager : MonoBehaviour
     private BuildingManager m_buildingManager;
 
     public BuildingManager BuildingManager => m_buildingManager;
+
+    private DeliveryBotSpawner m_botSpawner;
+    public List<LevelData> m_levels;
     
     private NavGrid m_navGrid;
 
@@ -18,13 +33,60 @@ public class LevelManager : MonoBehaviour
 
     private int m_mistakes = 0;
     public int Mistakes => m_mistakes;
-    public event Action OnMistakeAdded; 
+
+    private LevelData m_currentLevel = null;
+    private int m_currentLevelIndex = -1;
+
+    private LevelData m_nextLevel = null;
+    public event Action OnMistakeAdded;
+    public event Action<LevelData> OnLevelStart;
+
+    private bool m_transitioningToNextLevel = false;
+    private float m_transitionTimer = 0;
     private void Awake()
     {
         Instance = this;
 
+        m_botSpawner = FindObjectOfType<DeliveryBotSpawner>();
         m_navGrid = FindObjectOfType<NavGrid>();
         m_mistakes = 0;
+    }
+
+    private void Start()
+    {
+        TransitionToNextLevel();
+    }
+
+    private void OnEnable()
+    {
+        m_botSpawner.OnAllBotsSpawnedAndDestroyed += OnAllBotsSpawnedAndDestroyed;
+    }
+
+    private void OnDisable()
+    {
+        m_botSpawner.OnAllBotsSpawnedAndDestroyed -= OnAllBotsSpawnedAndDestroyed;
+    }
+
+    private void Update()
+    {
+        if (m_transitioningToNextLevel)
+        {
+            if (m_transitionTimer < m_nextLevel.m_startDelay)
+            {
+                m_transitionTimer += Time.deltaTime;
+            }
+            else
+            {
+                m_transitionTimer = 0;
+                NextLevel();
+            }
+        }
+    }
+
+    private void OnAllBotsSpawnedAndDestroyed()
+    {
+        Debug.Log("finished level " + m_currentLevel.m_levelName);
+        TransitionToNextLevel();
     }
 
     public void AddMistake()
@@ -36,5 +98,28 @@ public class LevelManager : MonoBehaviour
         {
             //game over
         }
+    }
+
+    public void TransitionToNextLevel()
+    {
+        if (m_levels.Count > m_currentLevelIndex + 1)
+        {
+            m_nextLevel = m_levels[m_currentLevelIndex + 1];
+            m_transitionTimer = 0;
+            m_transitioningToNextLevel = true;   
+        }
+        else
+        {
+            Debug.Log("no more levels");
+            //no more levels
+        }
+    }
+    public void NextLevel()
+    {
+        Debug.Log("start level " + m_nextLevel.m_levelName);
+        m_transitioningToNextLevel = false;
+        m_currentLevelIndex++;
+        m_currentLevel = m_nextLevel;   
+        OnLevelStart?.Invoke(m_currentLevel);
     }
 }

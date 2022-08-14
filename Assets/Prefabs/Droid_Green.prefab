@@ -147,10 +147,10 @@ MonoBehaviour:
     m_botPrefab: {fileID: 0}
     m_amount: 5
   m_prefix: G
-  m_type: 1
-  m_moveSpeed: 5
+  m_moveSpeed: 20
   m_slapShockTime: 1
   m_highlightObject: {fileID: 8750659375179918235}
+  m_type: 1
 --- !u!1 &8750659375179918235
 GameObject:
   m_ObjectHideFlags: 0
