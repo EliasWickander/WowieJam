@@ -1301,6 +1301,7 @@ MonoBehaviour:
   m_idleClip: {fileID: 11400000, guid: e206a38a166c94f4ca36312b11789d0c, type: 2}
   m_twitchDelayMin: 10
   m_twitchDelayMax: 20
+  m_animator: {fileID: 6001406418236269905}
 --- !u!82 &2226704928413021754
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1518,6 +1519,7 @@ MonoBehaviour:
   m_idleClip: {fileID: 11400000, guid: e206a38a166c94f4ca36312b11789d0c, type: 2}
   m_twitchDelayMin: 10
   m_twitchDelayMax: 20
+  m_animator: {fileID: 5133510100224604609}
 --- !u!82 &871070506338303088
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1770,6 +1772,7 @@ MonoBehaviour:
   m_idleClip: {fileID: 11400000, guid: e206a38a166c94f4ca36312b11789d0c, type: 2}
   m_twitchDelayMin: 10
   m_twitchDelayMax: 20
+  m_animator: {fileID: 3489314318552064467}
 --- !u!82 &1261815659207307319
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2225,6 +2228,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3693112986410881244, guid: ed2e3fafa127cf840ba3a595e5b77118, type: 3}
   m_PrefabInstance: {fileID: 255710195137399156}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &6001406418236269905 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5820111172751633445, guid: ed2e3fafa127cf840ba3a595e5b77118, type: 3}
+  m_PrefabInstance: {fileID: 255710195137399156}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8218305332643398858
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2294,6 +2302,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: db5421525fa2f3445833292dc8f1452b, type: 3}
+--- !u!95 &3489314318552064467 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4783317356414919961, guid: db5421525fa2f3445833292dc8f1452b, type: 3}
+  m_PrefabInstance: {fileID: 8218305332643398858}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7818679094196766433 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2201360947492651563, guid: db5421525fa2f3445833292dc8f1452b, type: 3}
@@ -2368,6 +2381,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9051668ab1b9cd3469e99d3ea7f61012, type: 3}
+--- !u!95 &5133510100224604609 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 4287271002775723120, guid: 9051668ab1b9cd3469e99d3ea7f61012, type: 3}
+  m_PrefabInstance: {fileID: 8953884484835730865}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5133510100224604610 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4287271002775723123, guid: 9051668ab1b9cd3469e99d3ea7f61012, type: 3}

@@ -76,6 +76,9 @@ public class AudioManager : MonoBehaviour
 
     public void PlayAudio(AudioSource audioSource, AudioClipData clip, float delay = 0, float duration = Mathf.Infinity)
     {
+        if(audioSource == null)
+            return;
+        
         if(!m_activeSources.ContainsKey(audioSource))
             m_activeSources.Add(audioSource, null);
 

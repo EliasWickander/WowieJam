@@ -22,6 +22,8 @@ public class DeliverySupervisor : MonoBehaviour
 
     private float m_twitchTimer = 0;
     private float m_currentTwitchTime;
+
+    public Animator m_animator;
     
     private void Awake()
     {
@@ -80,12 +82,15 @@ public class DeliverySupervisor : MonoBehaviour
                 bot.CurrentTarget != bot.DesignatedTarget)
             {
                 bot.Slap();
+                m_animator.SetTrigger("RightSlap");
                 return;
             }
         }
         
         AudioManager.Instance.PlayAudio(m_audioSource, m_angryClip);
         LevelManager.Instance.AddMistake();
+        Debug.Log("wrong slap");
+        m_animator.SetTrigger("WrongSlap");
         //No bots to correct
     }
 }

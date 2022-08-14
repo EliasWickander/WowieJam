@@ -11,14 +11,26 @@ public class SelectionManager : MonoBehaviour
     private DeliveryBot m_selectedDroid = null;
     private Building m_prevDroidBuilding = null;
 
+    public float m_selectionRadius = 2;
+
     private void Update()
     {
         Ray rayToMouseButton = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(rayToMouseButton, out RaycastHit hitInfo, Mathf.Infinity, m_droidMask))
+        if (Physics.SphereCast(rayToMouseButton, m_selectionRadius, out RaycastHit hitInfo, Mathf.Infinity, m_droidMask))
         {
             DeliveryBot hitDroid = hitInfo.collider.GetComponentInParent<DeliveryBot>();
 
+            if (m_selectedDroid != null)
+            {
+                if (hitDroid != m_selectedDroid)
+                {
+                    m_selectedDroid.SetHighlighted(false);
+                    m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                    m_selectedDroid = null;
+                }
+            }
+            
             if (Equals(hitDroid.StateMachine.CurrentStateType, DroidStates.Deliver) ||
                 Equals(hitDroid.StateMachine.CurrentStateType, DroidStates.Slapped))
             {
@@ -34,6 +46,15 @@ public class SelectionManager : MonoBehaviour
                 
                 m_prevDroidBuilding = m_selectedDroid.CurrentTarget;
             }
+            else
+            {
+                if (m_selectedDroid != null)
+                {
+                    m_selectedDroid.SetHighlighted(false);
+                    m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                    m_selectedDroid = null;
+                }
+            }
         }
         else
         {
@@ -44,6 +65,19 @@ public class SelectionManager : MonoBehaviour
             }
             m_selectedDroid = null;
             m_prevDroidBuilding = null;
+        }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Ray rayToMouseButton = Camera.main.ScreenPointToRay(Input.mousePosition);
+        
+        if (Physics.SphereCast(rayToMouseButton, m_selectionRadius, out RaycastHit hitInfo, Mathf.Infinity, 1 << LayerMask.NameToLayer("Water")))
+        {
+            Debug.Log(hitInfo.collider.gameObject);
+            Gizmos.color = Color.magenta;
+            Gizmos.DrawWireSphere(hitInfo.point, m_selectionRadius);
+            Gizmos.color = Color.white;
         }
     }
 }
