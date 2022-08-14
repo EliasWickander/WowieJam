@@ -7,4 +7,5 @@ public class AudioClipData : ScriptableObject
 {
     public AudioClip m_audioClip;
     public AudioGroupData m_group;
+    public bool m_loop = false;
 }

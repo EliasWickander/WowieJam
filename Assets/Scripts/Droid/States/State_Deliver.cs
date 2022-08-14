@@ -40,7 +40,7 @@ public class State_Deliver : State
         
         if (!m_controller.WasSlapped && m_controller.DesignatedTarget == m_controller.CurrentTarget)
         {
-            if (Random.Range(0, 1) < LevelManager.Instance.BotSpawner.m_malfunctionPercentage)
+            if (Random.Range(0.0f, 1.0f) < LevelManager.Instance.BotSpawner.m_malfunctionPercentage)
             {
                 m_malfunctionNode = Random.Range((int)(m_path.Count * 0.5f) - 1, m_path.Count);
                 m_willMalfunction = true;

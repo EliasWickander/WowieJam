@@ -383,6 +383,7 @@ MonoBehaviour:
   m_sparkVFX: {fileID: 4326451834104535345}
   m_exclamationMarkObject: {fileID: 4276897805085305136}
   m_audioSource: {fileID: 0}
+  m_isHighlighted: 0
 --- !u!82 &1744489603299319733
 AudioSource:
   m_ObjectHideFlags: 0
