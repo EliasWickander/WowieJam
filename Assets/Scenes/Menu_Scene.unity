@@ -1531,6 +1531,7 @@ GameObject:
   - component: {fileID: 841986261}
   - component: {fileID: 841986262}
   - component: {fileID: 841986263}
+  - component: {fileID: 841986264}
   m_Layer: 5
   m_Name: InternationalButton
   m_TagString: Untagged
@@ -1668,6 +1669,7 @@ MonoBehaviour:
   modename: Tutorial
   modedescription: Thing get serious,the city Layout is different each day and the
     bots are faster and more prone to error!
+  m_bindedButton: {fileID: 841986264}
 --- !u!114 &841986262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1779,6 +1781,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &841986264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841986256}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a8f46fee576788438b9360356d61b3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPressedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1065708470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1791,6 +1814,7 @@ GameObject:
   - component: {fileID: 1065708473}
   - component: {fileID: 1065708472}
   - component: {fileID: 1065708471}
+  - component: {fileID: 1065708475}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1884,6 +1908,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1065708475
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1065708470}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c396566f04537249b79547da10df48b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1136784780
 GameObject:
   m_ObjectHideFlags: 0
@@ -2017,6 +2053,7 @@ GameObject:
   - component: {fileID: 1156345439}
   - component: {fileID: 1156345440}
   - component: {fileID: 1156345441}
+  - component: {fileID: 1156345442}
   m_Layer: 5
   m_Name: OptionButton
   m_TagString: Untagged
@@ -2101,18 +2138,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1156345438}
-        m_TargetAssemblyTypeName: Gamemode_display, Assembly-CSharp
-        m_MethodName: DisablePanel
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1156345436
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2165,6 +2190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modename: Options
   modedescription: Modify your preference here
+  m_bindedButton: {fileID: 1156345442}
 --- !u!114 &1156345439
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2289,6 +2315,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obj: {fileID: 655791783}
+--- !u!114 &1156345442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156345433}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b375a7bbe3bf2f047a48312172661544, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPressedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1184271420
 GameObject:
   m_ObjectHideFlags: 0
@@ -2380,6 +2427,7 @@ GameObject:
   - component: {fileID: 1227997328}
   - component: {fileID: 1227997329}
   - component: {fileID: 1227997330}
+  - component: {fileID: 1227997331}
   m_Layer: 5
   m_Name: ScenarioButton
   m_TagString: Untagged
@@ -2517,6 +2565,7 @@ MonoBehaviour:
   modename: Play
   modedescription: Learn and play a workweek of 5 days,From 6 am to 1 pm check ot
     the deliveries of different bots in the city
+  m_bindedButton: {fileID: 1227997331}
 --- !u!114 &1227997329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2628,6 +2677,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1227997331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1227997323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0258116b1649d8743aada2c1cd99ff15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPressedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1240876191
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,6 +4707,7 @@ GameObject:
   - component: {fileID: 2081943147}
   - component: {fileID: 2081943148}
   - component: {fileID: 2081943149}
+  - component: {fileID: 2081943150}
   m_Layer: 5
   m_Name: ExitButton
   m_TagString: Untagged
@@ -4773,6 +4844,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   modename: Exit
   modedescription: Quit the game like a furious Vyttoryo Sgarby
+  m_bindedButton: {fileID: 2081943150}
 --- !u!114 &2081943148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4884,6 +4956,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2081943150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2081943142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df94786e54250aa4f819b74d8d6841c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnPressedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverEnterEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHoverExitEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2127182808
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitHandler
+public class Gamemode_display : MonoBehaviour
 {
     //Data
     GameObject InformationPanel,titleholder,Descriptionholder;
@@ -12,7 +13,8 @@ public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitH
     AudioSource au;
    [SerializeField] string modename, modedescription;
 
-
+   public CustomButton m_bindedButton;
+   
     private void Awake()
     {
         //Get Gameobject
@@ -25,48 +27,36 @@ public class Gamemode_display : MonoBehaviour,IPointerEnterHandler,IPointerExitH
         title = titleholder.GetComponent<TMP_Text>();
         description = Descriptionholder.GetComponent<TMP_Text>();
     }
-    // Start is called before the first frame update
-    void Start()
+
+    private void OnEnable()
     {
-       
-
-
-       
-
+        m_bindedButton.OnHoverEnterCB += OnHoverEnter;
+        m_bindedButton.OnHoverExitCB += OnHoverExit;
+    }
+    
+    private void OnDisable()
+    {
+        m_bindedButton.OnHoverEnterCB += OnHoverEnter;
+        m_bindedButton.OnHoverExitCB -= OnHoverExit;
     }
 
-    // Update is called once per frame
-    void Update()
+    
+    private void OnHoverEnter()
     {
-        
-    }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Yaover");
         InformationPanel.SetActive(true);
         title.text = modename;
         description.text = modedescription;
         au.Play();
+    }
 
-    }
-    private void OnMouseOver()
-    {
-      
-       
-    }
-    public void OnPointerExit(PointerEventData eventData)
+    private void OnHoverExit()
     {
         DisablePanel();
     }
-
+    
     public void DisablePanel()
     {
         if(InformationPanel.activeSelf)
             InformationPanel.SetActive(false);
-    }
-    
-    private void OnMouseExit()
-    {
-        
     }
 }
