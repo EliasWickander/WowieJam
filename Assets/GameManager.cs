@@ -36,6 +36,8 @@ public class GameManager : MonoBehaviour
 
     public GameStateType m_startGameState;
 
+    private AudioManager m_audioManager;
+
     private void Awake()
     {
         if (Instance != null)
@@ -46,15 +48,16 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-        }
-
-        Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
-        foreach (GameState state in m_gameStates)
-        {
-            m_gameStatesDictionary.Add(state.m_type, state);
-        }
+            
+            m_audioManager = GetComponent<AudioManager>();
+            Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
+            foreach (GameState state in m_gameStates)
+            {
+                m_gameStatesDictionary.Add(state.m_type, state);
+            }
         
-        SetState(m_startGameState);
+            SetState(m_startGameState);
+        }
     }
 
     public void SetState(GameStateType state)
@@ -62,7 +65,7 @@ public class GameManager : MonoBehaviour
         m_currentGameState = m_gameStatesDictionary[state];
 
         if(m_currentGameState.m_soundTrack != null)
-            AudioManager.Instance.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
+            m_audioManager.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
         
         if (m_currentGameState.m_sceneToOpenOnEnter != "" && SceneManager.GetActiveScene().name != m_currentGameState.m_sceneToOpenOnEnter)
         {
@@ -75,7 +78,17 @@ public class GameManager : MonoBehaviour
         m_currentGameState = m_gameStatesDictionary[GameStateType.GameState_Playing];
         
         if(m_currentGameState.m_soundTrack != null)
-            AudioManager.Instance.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
+            m_audioManager.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
+
+        SceneManager.LoadScene(m_currentGameState.m_sceneToOpenOnEnter);
+    }
+    
+    public void RestartTutorialScene()
+    {
+        m_currentGameState = m_gameStatesDictionary[GameStateType.GameState_Tutorial];
+        
+        if(m_currentGameState.m_soundTrack != null)
+            m_audioManager.PlayAudio(m_currentGameState.m_soundTrack, m_currentGameState.m_soundStartDelay);
 
         SceneManager.LoadScene(m_currentGameState.m_sceneToOpenOnEnter);
     }

@@ -73,7 +73,9 @@ public class DeliveryBotSpawner : MonoBehaviour
 
         m_botsAlive = 0;
         m_spawnCount = 0;
-        m_canSpawn = true;
+
+        if (SceneManager.GetActiveScene().name == "Game_Scene")
+            m_canSpawn = true;
     }
 
     private void OnBotFinishedDelivery(DeliveryBot bot)

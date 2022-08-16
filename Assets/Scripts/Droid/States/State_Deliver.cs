@@ -8,9 +8,9 @@ public class State_Deliver : State
 {
     private DeliveryBot m_controller;
     
-    private List<PathNode> m_path = null;
+    public List<PathNode> m_path = null;
 
-    private int m_currentNodeIndex = -1;
+    public int m_currentNodeIndex = -1;
 
     private int m_malfunctionNode = -1;
     private bool m_willMalfunction = false;

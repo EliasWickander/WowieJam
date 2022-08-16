@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class TutorialSegment
 {
     public UnityEvent m_event;
-    public bool m_automatic = false;
     public float m_autoDuration = 0;
 }
 
@@ -27,6 +26,10 @@ public class TutorialSequence : MonoBehaviour
 
     private int m_spawnedBots = 0;
     private DeliveryBot m_lastBotSpawned;
+
+    private bool m_canProceed = false;
+
+    public List<TutorialPopUp> m_tutorialObjects;
 
     private void Awake()
     {
@@ -65,35 +68,49 @@ public class TutorialSequence : MonoBehaviour
         if(m_done)
             return;
 
+        if (m_canProceed)
+        {
+            if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+            {
+                ManualNextSegment();
+            }
+        }
+
         switch (m_currentSegmentIndex)
         {
             case 0:
             {
-                if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
-                {
-                    ManualNextSegment();
-                }
+                AllowNext();
                 break;
             }
             case 1:
             {
-                Debug.Log(LevelManager.Instance.BotSpawner.m_canSpawn);
-                if (Time.time >= m_segmentStartTimeStamp + m_currentSegment.m_autoDuration)
+                if (m_spawnedBots == 1)
                 {
-                    NextSegment();
+                    if (Equals(m_lastBotSpawned.StateMachine.CurrentStateType, (Enum) DroidStates.Deliver))
+                    {
+                        State_Deliver stateDeliver = m_lastBotSpawned.StateMachine.CurrentState as State_Deliver;
+
+                        if (stateDeliver.m_currentNodeIndex > (int) (stateDeliver.m_path.Count * 0.5f) - 1)
+                        {
+                            AllowNext();
+                        }
+                    }
                 }
+                
                 break;
             }
             case 2:
             {
+                SetPaused(true);
                 if (m_spawnedBots == 1)
                 {
                     if (m_lastBotSpawned.m_isHighlighted)
                     {
                         LevelManager.Instance.BotSpawner.m_malfunctionPercentage = 1;
                         LevelManager.Instance.BotSpawner.m_correctAtStartPercentage = 0;
-                        
-                        NextSegment();
+
+                        AllowNext();
                     }
                 }
                 break;
@@ -102,22 +119,31 @@ public class TutorialSequence : MonoBehaviour
             {
                 if (m_spawnedBots == 2)
                 {
-                    NextSegment();   
+                    NextSegment();
                 }
 
                 break;
             }
             case 4:
             {
-                if (Time.time >= m_segmentStartTimeStamp + m_currentSegment.m_autoDuration)
+                if (m_spawnedBots == 2)
                 {
-                    NextSegment();
+                    if (Equals(m_lastBotSpawned.StateMachine.CurrentStateType, (Enum) DroidStates.Deliver))
+                    {
+                        State_Deliver stateDeliver = m_lastBotSpawned.StateMachine.CurrentState as State_Deliver;
+
+                        if (stateDeliver.m_currentNodeIndex > (int) (stateDeliver.m_path.Count * 0.5f) - 1)
+                        {
+                            NextSegment();
+                        }
+                    }
                 }
                 
                 break;
             }
             case 5:
             {
+                SetPaused(true);
                 if (m_lastBotSpawned.WasSlapped)
                 {
                     NextSegment();
@@ -126,21 +152,32 @@ public class TutorialSequence : MonoBehaviour
             }
             case 6:
             {
-                if (Time.time >= m_segmentStartTimeStamp + m_currentSegment.m_autoDuration)
-                {
-                    NextSegment();
-                }
+                AllowNext(false);
 
                 break;
             }
             case 7:
+            {
+                AllowNext(false);
+                break;
+            }
+            case 8:
             {
                 GameManager.Instance.SetState(GameStateType.GameState_Menu);
                 break;
             }
         }
     }
-    
+
+    private void AllowNext(bool paused = true)
+    {
+        m_tutorialObjects[m_currentSegmentIndex].ActivateNext();
+        
+        m_canProceed = true;
+        
+        if(paused)
+            SetPaused(true);
+    }
     public void OnBotDestroyed(DeliveryBot bot)
     {
         bot.OnDestroyed -= OnBotDestroyed;
@@ -161,6 +198,17 @@ public class TutorialSequence : MonoBehaviour
             m_currentSegment = m_segments[m_currentSegmentIndex];   
             m_currentSegment.m_event?.Invoke();
             m_segmentStartTimeStamp = Time.unscaledTime;
+
+            SetPaused(false);
+            if (m_currentSegmentIndex > 0)
+            {
+                m_tutorialObjects[m_currentSegmentIndex - 1].gameObject.SetActive(false);
+            }
+            
+            if(m_currentSegmentIndex < m_tutorialObjects.Count) 
+                m_tutorialObjects[m_currentSegmentIndex].gameObject.SetActive(true);
+            
+            m_canProceed = false;
         }
         else
         {
@@ -171,9 +219,13 @@ public class TutorialSequence : MonoBehaviour
 
     public void ManualNextSegment()
     {
-        if (m_currentSegmentIndex == 0)
+        if (m_canProceed)
         {
-            LevelManager.Instance.BotSpawner.m_canSpawn = true;
+            if (m_currentSegmentIndex == 0)
+            {
+                LevelManager.Instance.BotSpawner.m_canSpawn = true;
+            }
+            
             NextSegment();
         }
     }

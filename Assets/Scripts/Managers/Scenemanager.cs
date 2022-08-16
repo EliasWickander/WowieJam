@@ -29,10 +29,16 @@ public class Scenemanager : MonoBehaviour
         GameManager.Instance.SetState(GameStateType.GameState_Playing);
     }
 
-    public void RestartScene()
+    public void RestartGameScene()
     {
         GameManager.Instance.RestartGameScene();
     }
+    
+    public void RestartTutorialScene()
+    {
+        GameManager.Instance.RestartTutorialScene();
+    }
+    
     public void BackToMainMenu()
     {
         GameManager.Instance.SetState(GameStateType.GameState_Menu);

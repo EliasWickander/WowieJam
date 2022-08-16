@@ -145,7 +145,9 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-            GameManager.Instance.SetState(GameStateType.GameState_Win);
+            if(SceneManager.GetActiveScene().name != "Tutorial_Scene")
+                GameManager.Instance.SetState(GameStateType.GameState_Win);
+            
             Debug.Log("no more levels");
             //no more levels
             m_allLevelsFinished = true;

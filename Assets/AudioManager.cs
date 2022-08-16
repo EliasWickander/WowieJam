@@ -105,6 +105,7 @@ public class AudioManager : MonoBehaviour
             audioSource.volume = m_masterGroup.m_volume - (m_masterGroup.m_volume - groupVolume);
 
         audioSource.loop = clip.m_loop;
+        
         if(delay == 0)
             audioSource.Play();
         else

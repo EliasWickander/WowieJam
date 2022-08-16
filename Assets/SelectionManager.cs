@@ -70,9 +70,9 @@ public class SelectionManager : MonoBehaviour
                 {
                     m_selectedDroid.SetHighlighted(false);
                     m_selectedDroid.CurrentTarget.SetHighlighted(false);
+                    m_selectedDroid = null;
                 }
             }
-            m_selectedDroid = null;
             m_prevDroidBuilding = null;
         }
     }
